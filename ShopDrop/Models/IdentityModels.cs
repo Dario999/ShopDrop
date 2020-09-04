@@ -29,5 +29,10 @@ namespace ShopDrop.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<ShopDrop.Models.Product> Products { get; set; }
+        public System.Data.Entity.DbSet<ShopDrop.Models.Category> Categories { get; set; }
+        public System.Data.Entity.DbSet<ShopDrop.Models.ShoppingCart> ShoppingCarts { get; set; }
+
     }
 }
