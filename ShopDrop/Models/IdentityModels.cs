@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -9,6 +10,15 @@ namespace ShopDrop.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        private ICollection<Ad> ads { get; set; }
+        private ICollection<Purchase> purchases { get; set; }
+        
+        public ApplicationUser()
+        {
+            ads = new List<Ad>();
+            purchases = new List<Purchase>();
+        }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -30,9 +40,12 @@ namespace ShopDrop.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<ShopDrop.Models.Product> Products { get; set; }
-        public System.Data.Entity.DbSet<ShopDrop.Models.Category> Categories { get; set; }
-        public System.Data.Entity.DbSet<ShopDrop.Models.ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Ad> Ads { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
+
+
+
 
     }
 }
