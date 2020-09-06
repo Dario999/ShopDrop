@@ -1,0 +1,42 @@
+﻿@model ShopDrop.Models.Ad
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ad</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.date_posted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_posted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.is_sold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.is_sold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.seller_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.seller_id)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
