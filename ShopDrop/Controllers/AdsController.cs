@@ -18,7 +18,8 @@ namespace ShopDrop.Controllers
         // GET: Ads
         public ActionResult Index()
         {
-            return View("Index",db.Products.ToList());
+            return View("Index",db.Products.ToList().FindAll(x => x.category == "Laptops"));
+
         }
 
         // GET: Ads/Details/5

@@ -1,4 +1,8 @@
+@using ShopDrop.Models
+
+
 @model IEnumerable<ShopDrop.Models.Product>
+
 
 @{
     ViewBag.Title = "Index";
@@ -22,7 +26,10 @@
         <input type="text" placeholder="Search..." style="width: 600px" class="form-control">
         <div class="select__option" style="margin-left: 10px;">
             <select class="form-control">
-                <option value="" class="form-control">Choose Categories</option>
+                <option value="" class="form-control">Laptops</option>
+                <option value="" class="form-control">Phone</option>
+                <option value="" class="form-control">Monitor</option>
+                <option value="" class="form-control">Mouse</option>
             </select>
         </div>
         <button type="submit" class="form-control" style="margin-left: 10px;">Search Now</button>
@@ -34,9 +41,10 @@
     @foreach (var item in Model)
     {
         <tr class="mt-2">
-            
+
             <td>
-                <img src="@item.Image" style="max-width: 450px; max-height: 250px" />
+                @*<img src="@item.Image" style="max-width: 450px; max-height: 250px" />*@
+                <img src='~/UserImages/@item.Image' style="max-width: 450px; max-height: 250px" />
             </td>
             <td>
                 <div class="row">
