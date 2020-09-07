@@ -36,6 +36,7 @@
                     <li>@Html.ActionLink("Products", "Index", "Products")</li>
                     <li>@Html.ActionLink("Ads", "Index", "Ads")</li>
                     <li>@Html.ActionLink("Add new product", "Create", "Products")</li>
+                    <li>@Html.ActionLink("My Ads", "ShowMyAds", "Ads")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("My purchases", "Index", "Purchases")</li>
@@ -46,17 +47,17 @@
     </div>
 
 
-    <div class="container body-content">
-        @RenderBody()
-        <footer>
-            <div style="background-color: lightcoral;" class="justify-content-center">
-                <p style="font-weight: bold; margin-left: 500px;">Shop-Drop &copy;</p>
-            </div>
+<div class="container body-content">
+    @RenderBody()
+</div>
 
-        </footer>
+<footer>
+    <div style="background-color: lightcoral; height: 50px;" class="justify-content-center">
+        <p style="font-weight: bold; margin-left: 650px; font-size: 20px">Shop-Drop &copy;</p>
     </div>
+</footer>
 
-    @Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/js")
 

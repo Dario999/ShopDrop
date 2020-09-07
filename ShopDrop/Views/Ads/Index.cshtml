@@ -1,8 +1,9 @@
-﻿@model IEnumerable<ShopDrop.Models.Product>
+@model IEnumerable<ShopDrop.Models.Product>
 
 @{
     ViewBag.Title = "Index";
 }
+
 
 
 <head>
@@ -27,6 +28,7 @@
         <button type="submit" class="form-control" style="margin-left: 10px;">Search Now</button>
     </form>
 </div>
+
 
 <table class="table">
     @foreach (var item in Model)
