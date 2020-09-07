@@ -54,7 +54,7 @@ namespace ShopDrop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Price,Quantity,Image")] Product product, HttpPostedFileBase ImageFile)
+        public ActionResult Create([Bind(Include = "Id,Name,Price,Quantity,Image,category")] Product product, HttpPostedFileBase ImageFile)
         {
             
             
