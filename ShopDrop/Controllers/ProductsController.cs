@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using ShopDrop.Models;
 
 namespace ShopDrop.Controllers
@@ -122,6 +124,19 @@ namespace ShopDrop.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult CreateAd(int? id) 
+        {
+            Ad add = new Ad();
+            add.product = db.Products.Find(id);
+            add.is_sold = false;
+            add.date_posted = DateTime.Now;
+            add.seller_id = User.Identity.GetUserId();
+            
+            db.Ads.Add(add);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
