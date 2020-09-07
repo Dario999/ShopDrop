@@ -43,7 +43,7 @@ namespace ShopDrop.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<Ad> Ads { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
-        public DbSet<User> Users { get; set; }
+        public new DbSet<User> Users { get; set; }
 
 
 
