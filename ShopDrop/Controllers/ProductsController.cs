@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -21,7 +23,11 @@ namespace ShopDrop.Controllers
         {
             return View(db.Products.ToList());
         }
+        private String computeHash(String fileName)
+        {
+            return String.Format("{0:X}", fileName.GetHashCode());
 
+        }
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
@@ -48,8 +54,18 @@ namespace ShopDrop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Price,Quantity,Image")] Product product)
+        public ActionResult Create([Bind(Include = "Id,Name,Price,Quantity,Image")] Product product, HttpPostedFileBase ImageFile)
         {
+            
+            
+            string trailingPath = Path.GetFileName(ImageFile.FileName);
+            string extension = Path.GetExtension(ImageFile.FileName);
+            trailingPath = computeHash(trailingPath + User.Identity.Name);
+            trailingPath = DateTime.Now.ToString("yyyy-MM-dd-hh-mm") + "_" +trailingPath + extension;
+            string fullPath = Path.Combine(Server.MapPath("~/UserImages"), trailingPath);
+            product.Image = trailingPath;
+            ImageFile.SaveAs(fullPath);
+
             if (ModelState.IsValid)
             {
                 db.Products.Add(product);
