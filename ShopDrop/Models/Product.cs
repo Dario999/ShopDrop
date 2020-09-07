@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -13,9 +14,9 @@ namespace ShopDrop.Models
         public string Name { get; set; }
         public float Price { get; set; }
         public int Quantity { get; set; }
+        [DisplayName("Upload File")]
         public string Image { get; set; }
         public string category { get; set; }
-
         public Product()
         {
         }
