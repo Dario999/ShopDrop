@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using ShopDrop.Models;
 
 namespace ShopDrop.Controllers
@@ -122,6 +123,12 @@ namespace ShopDrop.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult ShowMyAds()
+        {
+            string userId = User.Identity.GetUserId();
+            return View(db.Ads.Where(s => s.seller_id == userId).ToList()) ;
         }
     }
 }

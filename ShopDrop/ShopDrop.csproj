@@ -181,6 +181,10 @@
     <Compile Include="Migrations\202009070749534_first.designer.cs">
       <DependentUpon>202009070749534_first.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009071816521_init.cs" />
+    <Compile Include="Migrations\202009071816521_init.designer.cs">
+      <DependentUpon>202009071816521_init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Ad.cs" />
@@ -407,6 +411,7 @@
     <Content Include="Views\Purchases\Details.cshtml" />
     <Content Include="Views\Purchases\Edit.cshtml" />
     <Content Include="Views\Purchases\Index.cshtml" />
+    <Content Include="Views\Ads\ShowMyAds.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -423,6 +428,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202009070749534_first.resx">
       <DependentUpon>202009070749534_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009071816521_init.resx">
+      <DependentUpon>202009071816521_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
