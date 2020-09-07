@@ -1,45 +1,57 @@
-﻿@model IEnumerable<ShopDrop.Models.Ad>
+﻿@model IEnumerable<ShopDrop.Models.Product>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../Content/css/barfiller.css" type="text/css">
+    <link rel="stylesheet" href="../../Content/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="../../Content/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="../../Content/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../../Content/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../../Content/css/style.css" type="text/css">
+</head>
+
+<div class="hero__search__form">
+    <form action="#">
+        <input type="text" placeholder="Search..." style="width: 600px" class="form-control">
+        <div class="select__option" style="margin-left: 10px;">
+            <select class="form-control">
+                <option value="" class="form-control">Choose Categories</option>
+            </select>
+        </div>
+        <button type="submit" class="form-control" style="margin-left: 10px;">Search Now</button>
+    </form>
+</div>
+
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.date_posted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.is_sold)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.seller_id)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.date_posted)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.is_sold)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.seller_id)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr class="mt-2">
+            
+            <td>
+                <img src="@item.Image" style="max-width: 450px; max-height: 250px" />
+            </td>
+            <td>
+                <div class="row">
+                    <h5><b>@item.Name</b></h5>
+                </div>
+            </td>
+            <td>
+                <button class="btn btn-danger">Buy Now</button>
+            </td>
+        </tr>
+    }
 
 </table>
+
+
+<script src="../../Content/js/jquery.barfiller.js"></script>
+<script src="../../Content/js/jquery.magnific-popup.min.js"></script>
+<script src="../../Content/js/jquery.slicknav.js"></script>
+<script src="../../Content/js/owl.carousel.min.js"></script>
+<script src="../../Content/js/main.js"></script>

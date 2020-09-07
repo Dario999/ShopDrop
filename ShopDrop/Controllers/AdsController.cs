@@ -17,7 +17,7 @@ namespace ShopDrop.Controllers
         // GET: Ads
         public ActionResult Index()
         {
-            return View(db.Ads.ToList());
+            return View("Index",db.Products.ToList());
         }
 
         // GET: Ads/Details/5
