@@ -413,7 +413,9 @@
     <Content Include="Views\Purchases\Index.cshtml" />
     <Content Include="Views\Ads\ShowMyAds.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UserImages\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
