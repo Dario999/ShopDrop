@@ -1,40 +1,31 @@
-﻿@model ShopDrop.Models.Ad
+﻿@model ShopDrop.Models.Product
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Ad</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.date_posted)
-        </dt>
+<div class="container">
 
-        <dd>
-            @Html.DisplayFor(model => model.date_posted)
-        </dd>
+    <div class="row">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.is_sold)
-        </dt>
+        <div class="col-4" style="max-height: 400px;max-width: 400px">
+            <img src='~/UserImages/@Model.Image' />
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.is_sold)
-        </dd>
+        <div class="col-6">
+            <h2>Product details:</h2>
+            <br/>
+            <h5>@Model.Name</h5>
+            <br/>
+            <p>@Model.Price $</p>
+            <p>On stock: @Model.Quantity</p>
+            <br/>
+            @Html.ActionLink("Order Now", "MyOrders","Users",new { user_id = 1 },null)
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.seller_id)
-        </dt>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.seller_id)
-        </dd>
-
-    </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

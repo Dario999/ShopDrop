@@ -21,47 +21,89 @@
     <link rel="stylesheet" href="../../Content/css/style.css" type="text/css">
 </head>
 
+
 <div class="hero__search__form">
-    <form action="#">
-        <input type="text" placeholder="Search..." style="width: 600px" class="form-control">
-        <div class="select__option" style="margin-left: 10px;">
-            <select class="form-control">
-                <option value="" class="form-control">Laptops</option>
-                <option value="" class="form-control">Phone</option>
-                <option value="" class="form-control">Monitor</option>
-                <option value="" class="form-control">Mouse</option>
-            </select>
-        </div>
-        <button type="submit" class="form-control" style="margin-left: 10px;">Search Now</button>
-    </form>
+    
+        <form method="get">
+            <input type="text" placeholder="Search..." style="width: 600px" class="form-control">
+            <div class="select__option" style="margin-left: 10px;">
+                <select class="form-control" id="select_category">
+                    <option value="Laptops" class="form-control">Laptops</option>
+                    <option value="Phone" class="form-control">Phone</option>
+                    <option value="Monitor" class="form-control">Monitor</option>
+                    <option value="Mouse" class="form-control">Mouse</option>
+                </select>
+            </div>
+            <button id="search_button" >
+                @Html.ActionLink("Search", "ListByCategory", new { Category = "Laptops" })
+            </button>
+        </form>
+    
 </div>
 
 
-<table class="table">
-    @foreach (var item in Model)
-    {
-        <tr class="mt-2">
 
-            <td>
-                @*<img src="@item.Image" style="max-width: 450px; max-height: 250px" />*@
-                <img src='~/UserImages/@item.Image' style="max-width: 450px; max-height: 250px" />
-            </td>
-            <td>
-                <div class="row">
-                    <h5><b>@item.Name</b></h5>
-                </div>
-            </td>
-            <td>
-                <button class="btn btn-danger">Buy Now</button>
-            </td>
+<table class="table" id="ads_table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="mt-2">
+
+                <td style="width: 30%">
+                    @*<img src="@item.Image" style="max-width: 450px; max-height: 250px" />*@
+                    <img src='~/UserImages/@item.Image' style="max-width: 450px; max-height: 250px" />
+                </td>
+                <td style="width: 50%; padding-top: 20px">
+                    <div class="row mt-2">
+                        <h5><b>@item.Name</b></h5>
+                    </div>
+                    <div class="row" style="margin-top: 20px">
+                        <span style="font-size: 20px">@item.Price</span>
+                        <span>$</span>
+                    </div>
+                </td>
+                <td style="width: 20%; padding-top: 20px; padding-left: 30px">
+                    <button class="btn btn-danger">
+                        @Html.ActionLink("Details","Details",new { id = item.Id})
+                    </button>
+                   
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
 
 
-<script src="../../Content/js/jquery.barfiller.js"></script>
-<script src="../../Content/js/jquery.magnific-popup.min.js"></script>
-<script src="../../Content/js/jquery.slicknav.js"></script>
-<script src="../../Content/js/owl.carousel.min.js"></script>
-<script src="../../Content/js/main.js"></script>
+@section Scripts {
+
+    <script src="../../Content/js/jquery.barfiller.js"></script>
+    <script src="../../Content/js/jquery.magnific-popup.min.js"></script>
+    <script src="../../Content/js/jquery.slicknav.js"></script>
+    <script src="../../Content/js/owl.carousel.min.js"></script>
+    <script src="../../Content/js/main.js"></script>
+
+    <script>
+
+        var category = $("#select_category");
+        $("#search_button").click(function () {
+            console.log("test");
+        });
+    </script>
+
+
+}
+
+
+
+

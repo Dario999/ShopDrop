@@ -18,8 +18,13 @@ namespace ShopDrop.Controllers
         // GET: Ads
         public ActionResult Index()
         {
-            return View("Index",db.Products.ToList().FindAll(x => x.category == "Laptops"));
+            return View("Index", db.Products.ToList());
+        }
 
+        
+        public ActionResult ListByCategory(string Category)
+        {
+            return View("Index", db.Products.ToList().FindAll(x => x.category == Category));
         }
 
         // GET: Ads/Details/5
@@ -29,12 +34,13 @@ namespace ShopDrop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ad ad = db.Ads.Find(id);
+            Product ad = db.Products.Find(id);
             if (ad == null)
             {
                 return HttpNotFound();
             }
             return View(ad);
+            //return RedirectToAction("Details", "Products", new { id = id });
         }
 
         // GET: Ads/Create

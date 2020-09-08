@@ -1,0 +1,18 @@
+﻿@model ShopDrop.Models.User
+
+@{
+    ViewBag.Title = "MyOrders";
+}
+
+<h2>MyOrders</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<p>
+    @Model.user_id
+    @User.Identity.Name
+</p>
+
+
