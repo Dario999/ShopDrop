@@ -169,7 +169,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -178,21 +177,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202009070749534_first.cs" />
-    <Compile Include="Migrations\202009070749534_first.designer.cs">
-      <DependentUpon>202009070749534_first.cs</DependentUpon>
+    <Compile Include="Migrations\202009091911478_initial.cs" />
+    <Compile Include="Migrations\202009091911478_initial.designer.cs">
+      <DependentUpon>202009091911478_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202009090828346_refactor.cs" />
-    <Compile Include="Migrations\202009090828346_refactor.designer.cs">
-      <DependentUpon>202009090828346_refactor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009090844375_product_quantity.cs" />
-    <Compile Include="Migrations\202009090844375_product_quantity.designer.cs">
-      <DependentUpon>202009090844375_product_quantity.cs</DependentUpon>
+    <Compile Include="Migrations\202009091916124_second.cs" />
+    <Compile Include="Migrations\202009091916124_second.designer.cs">
+      <DependentUpon>202009091916124_second.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Ad.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -645,17 +639,11 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="Views\Ads\Create.cshtml" />
-    <Content Include="Views\Ads\Delete.cshtml" />
-    <Content Include="Views\Ads\Details.cshtml" />
-    <Content Include="Views\Ads\Edit.cshtml" />
-    <Content Include="Views\Ads\Index.cshtml" />
     <Content Include="Views\Purchases\Create.cshtml" />
     <Content Include="Views\Purchases\Delete.cshtml" />
     <Content Include="Views\Purchases\Details.cshtml" />
     <Content Include="Views\Purchases\Edit.cshtml" />
     <Content Include="Views\Purchases\Index.cshtml" />
-    <Content Include="Views\Ads\ShowMyAds.cshtml" />
     <Content Include="Views\Users\MyOrders.cshtml" />
     <Content Include="Views\Products\ShowMyProducts.cshtml" />
     <Content Include="Views\Purchases\Orders.cshtml" />
@@ -675,14 +663,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202009070749534_first.resx">
-      <DependentUpon>202009070749534_first.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202009091911478_initial.resx">
+      <DependentUpon>202009091911478_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009090828346_refactor.resx">
-      <DependentUpon>202009090828346_refactor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009090844375_product_quantity.resx">
-      <DependentUpon>202009090844375_product_quantity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202009091916124_second.resx">
+      <DependentUpon>202009091916124_second.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

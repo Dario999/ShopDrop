@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class first : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -31,6 +31,8 @@
                         Quantity = c.Int(nullable: false),
                         Image = c.String(),
                         category = c.String(),
+                        date_posted = c.DateTime(nullable: false),
+                        selller_id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -40,11 +42,12 @@
                     {
                         id = c.Int(nullable: false, identity: true),
                         buyer_id = c.String(),
-                        ad_Id = c.Int(),
+                        seller_id = c.String(),
+                        product_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.id)
-                .ForeignKey("dbo.Ads", t => t.ad_Id)
-                .Index(t => t.ad_Id);
+                .ForeignKey("dbo.Products", t => t.product_Id)
+                .Index(t => t.product_Id);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -132,7 +135,7 @@
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Purchases", "ad_Id", "dbo.Ads");
+            DropForeignKey("dbo.Purchases", "product_Id", "dbo.Products");
             DropForeignKey("dbo.Ads", "product_Id", "dbo.Products");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
@@ -140,7 +143,7 @@
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Purchases", new[] { "ad_Id" });
+            DropIndex("dbo.Purchases", new[] { "product_Id" });
             DropIndex("dbo.Ads", new[] { "product_Id" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");

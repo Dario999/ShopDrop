@@ -24,9 +24,9 @@ namespace ShopDrop.Controllers
             return View(db.Products.ToList());
         }
 
-        public ActionResult ListByCategory(string Category)
+        public ActionResult ListByCategory(Product model)
         {
-            return View("Index", db.Products.ToList().FindAll(x => x.category == Category));
+            return View("Index", db.Products.ToList().FindAll(x => x.category == model.category));
         }
 
         private String computeHash(String fileName)
@@ -62,12 +62,12 @@ namespace ShopDrop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Price,Quantity,Image,category")] Product product, HttpPostedFileBase ImageFile)
         {
-            
-            
+
+
             string trailingPath = Path.GetFileName(ImageFile.FileName);
             string extension = Path.GetExtension(ImageFile.FileName);
             trailingPath = computeHash(trailingPath + User.Identity.Name);
-            trailingPath = DateTime.Now.ToString("yyyy-MM-dd-hh-mm") + "_" +trailingPath + extension;
+            trailingPath = DateTime.Now.ToString("yyyy-MM-dd-hh-mm") + "_" + trailingPath + extension;
             string fullPath = Path.Combine(Server.MapPath("~/UserImages"), trailingPath);
             product.Image = trailingPath;
             ImageFile.SaveAs(fullPath);
@@ -146,19 +146,6 @@ namespace ShopDrop.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public ActionResult CreateAd(int? id) 
-        {
-            Ad add = new Ad();
-            add.product = db.Products.Find(id);
-            add.is_sold = false;
-            add.date_posted = DateTime.Now;
-            add.seller_id = User.Identity.GetUserId();
-            
-            db.Ads.Add(add);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
 

@@ -7,13 +7,13 @@ namespace ShopDrop.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class product_quantity : IMigrationMetadata
+    public sealed partial class second : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(product_quantity));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(second));
         
         string IMigrationMetadata.Id
         {
-            get { return "202009090844375_product_quantity"; }
+            get { return "202009091916124_second"; }
         }
         
         string IMigrationMetadata.Source
