@@ -23,6 +23,12 @@ namespace ShopDrop.Controllers
         {
             return View(db.Products.ToList());
         }
+
+        public ActionResult ListByCategory(string Category)
+        {
+            return View("Index", db.Products.ToList().FindAll(x => x.category == Category));
+        }
+
         private String computeHash(String fileName)
         {
             return String.Format("{0:X}", fileName.GetHashCode());
@@ -154,5 +160,14 @@ namespace ShopDrop.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+        public ActionResult ShowMyProducts()
+        {
+            string userId = User.Identity.GetUserId();
+            User user = db.Users.Where(s => s.user_id == userId).First();
+            return View(db.Products.Where(s => s.selller_id == user.Id).First());
+        }
+
     }
 }

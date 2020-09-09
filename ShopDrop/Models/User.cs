@@ -12,13 +12,13 @@ namespace ShopDrop.Models
         [Key]
         public int Id { get; set; }
         public string user_id { get; set; }
-        private ICollection<Ad> ads { get; set; }
+        private ICollection<Product> products { get; set; }
         private ICollection<Purchase> purchases { get; set; }
         public double balance { get; set; }
 
         public User()
         {
-            ads = new List<Ad>();
+            products = new List<Product>();
             purchases = new List<Purchase>();
         }
     }

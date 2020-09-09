@@ -12,7 +12,8 @@ namespace ShopDrop.Models
         [Key]
         public int id { get; set; }
         public string buyer_id { get; set; }
-        public Ad ad { get; set; }
+        public string seller_id { get; set; }
+        public Product product { get; set; }
 
     }
 }

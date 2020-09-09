@@ -4,44 +4,28 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Product</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+<div class="container">
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+    <div class="row">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+        <div class="col-4" style="max-height: 400px;max-width: 400px">
+            <img src='~/UserImages/@Model.Image' />
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+        <div class="col-6">
+            <h2>Product details:</h2>
+            <br />
+            <h5>@Model.Name</h5>
+            <br />
+            <p>@Model.Price $</p>
+            <p>On stock: @Model.Quantity</p>
+            <br />
+            @Html.ActionLink("Order Now", "MyOrders", "Users", new { user_id = 1 }, null)
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-
-      
-        <img src='~/UserImages/@Model.Image' />
-
-    </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
