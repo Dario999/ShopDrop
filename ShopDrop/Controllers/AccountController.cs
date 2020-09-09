@@ -17,6 +17,7 @@ namespace ShopDrop.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -153,6 +154,12 @@ namespace ShopDrop.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                User u = new User();
+                u.user_id = UserManager.FindByEmail(model.Email).Id;
+                db.Users.Add(u);
+                db.SaveChanges();
+
+                
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);

@@ -26,27 +26,33 @@
                             <div class="hero__search__form">
                                 <form action="#">
                                     <input type="text" placeholder="Search..." style="margin-left: 200px;" class="form-control">
-                                    <div class="select__option" style="margin-left: 10px;" >
-                                        <select class="form-control">
+                                    <div class="select__option"  style="margin-left: 10px;" >
+                                        <select class="form-control" id="selectCategory">
                                             <option value="" class="form-control">Choose Categories</option>
+                                            <option value="Laptops" class="form-control">Laptops</option>
+                                            <option value="Phone" class="form-control">Phone</option>
+                                            <option value="Monitor" class="form-control">Monitor</option>
+                                            <option value="Mouse" class="form-control">Mouse</option>
                                         </select>
                                     </div>
-                                    <button type="submit"  class="form-control" style="margin-left: 10px;">Search Now</button>
+                                    <button type="submit"  class="form-control" style="margin-left: 10px;">@Html.ActionLink("Search Now","ListByCategory","Products")</button>
                                 </form>
                             </div>
                             <ul class="hero__categories__tags">
-                                <li><a href="#"><img src="../../Content/img/hero/cat-1.png" alt=""> Vehicles</a></li>
-                                <li><a href="#"><img src="../../Content/img/hero/cat-2.png" alt=""> Food,Drinks & Cooking</a></li>
-                                <li><a href="#"><img src="../../Content/img/hero/cat-3.png" alt=""> Mobile phones & Multimedia</a></li>
-                                <li><a href="#"><img src="../../Content/img/hero/cat-4.png" alt=""> Jewelery</a></li>
-                                <li><a href="#"><img src="../../Content/img/hero/cat-5.png" alt=""> Home & Apartments</a></li>
-                                <li><a href="#"><img src="../../Content/img/hero/cat-6.png" alt=""> All Categories</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Laptops"},null)"><img src="../../Content/img/hero/cat-1.png" alt=""> Vehicles</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category=""},null)"><img src="../../Content/img/hero/cat-2.png" alt=""> Food,Drinks & Cooking</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category=""},null)"><img src="../../Content/img/hero/cat-3.png" alt=""> Mobile phones & Multimedia</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category=""},null)"><img src="../../Content/img/hero/cat-4.png" alt=""> Jewelery</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category=""},null)"><img src="../../Content/img/hero/cat-5.png" alt=""> Home & Apartments</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category=""},null)"><img src="../../Content/img/hero/cat-6.png" alt=""> All Categories</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
+     
 
 
         <script src="../../Content/js/jquery.barfiller.js"></script>
