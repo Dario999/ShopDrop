@@ -192,6 +192,10 @@
     <Compile Include="Migrations\202009090844375_product_quantity.designer.cs">
       <DependentUpon>202009090844375_product_quantity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009091522429_init2.cs" />
+    <Compile Include="Migrations\202009091522429_init2.designer.cs">
+      <DependentUpon>202009091522429_init2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Ad.cs" />
@@ -779,6 +783,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009090844375_product_quantity.resx">
       <DependentUpon>202009090844375_product_quantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009091522429_init2.resx">
+      <DependentUpon>202009091522429_init2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
