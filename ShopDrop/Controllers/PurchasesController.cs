@@ -41,6 +41,17 @@ namespace ShopDrop.Controllers
             return View();
         }
 
+        public ActionResult Orders(string id)
+        {
+            List<Purchase> purchases = db.Purchases.Where(x => x.buyer_id == id).ToList();
+            List<Product> products = new List<Product>();
+            foreach (Purchase p in purchases)
+            {
+                products.Add(p.product);
+            }
+            return View("Orders", products);
+        }
+
         // POST: Purchases/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

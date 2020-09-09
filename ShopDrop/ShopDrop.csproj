@@ -658,6 +658,7 @@
     <Content Include="Views\Ads\ShowMyAds.cshtml" />
     <Content Include="Views\Users\MyOrders.cshtml" />
     <Content Include="Views\Products\ShowMyProducts.cshtml" />
+    <Content Include="Views\Purchases\Orders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UserImages\" />

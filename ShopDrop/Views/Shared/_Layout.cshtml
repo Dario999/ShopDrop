@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -37,7 +39,12 @@
                     <li>@Html.ActionLink("Add new product", "Create", "Products")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("My purchases", "Index", "Purchases")</li>
+                    @if (Request.IsAuthenticated)
+                    {
+
+                        <li>@Html.ActionLink("My Orders", "Orders", "Purchases", new { id = User.Identity.GetUserId() }, null)</li>
+
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -45,17 +52,17 @@
     </div>
 
 
-<div class="container body-content">
-    @RenderBody()
-</div>
-
-<footer>
-    <div style="background-color: lightcoral; height: 50px;" class="justify-content-center">
-        <p style="font-weight: bold; margin-left: 650px; font-size: 20px">Shop-Drop &copy;</p>
+    <div class="container body-content">
+        @RenderBody()
     </div>
-</footer>
 
-@Scripts.Render("~/bundles/jquery")
+    <footer>
+        <div style="background-color: lightcoral; height: 50px;" class="justify-content-center">
+            <p style="font-weight: bold; margin-left: 650px; font-size: 20px">Shop-Drop &copy;</p>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/js")
 

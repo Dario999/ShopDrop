@@ -166,7 +166,7 @@ namespace ShopDrop.Controllers
         {
             string userId = User.Identity.GetUserId();
             User user = db.Users.Where(s => s.user_id == userId).First();
-            return View(db.Products.Where(s => s.selller_id == user.Id).First());
+            return View(db.Products.Where(s => s.selller_id == user.Id));
         }
 
     }
