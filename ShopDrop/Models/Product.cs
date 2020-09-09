@@ -17,8 +17,11 @@ namespace ShopDrop.Models
         [DisplayName("Upload File")]
         public string Image { get; set; }
         public string category { get; set; }
+        public DateTime date_posted { get; set; }
+        public int selller_id { get; set; }
         public Product()
         {
+            date_posted = DateTime.Now;
         }
     }
 }

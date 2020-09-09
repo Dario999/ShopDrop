@@ -182,9 +182,13 @@
     <Compile Include="Migrations\202009070749534_first.designer.cs">
       <DependentUpon>202009070749534_first.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202009071816521_init.cs" />
-    <Compile Include="Migrations\202009071816521_init.designer.cs">
-      <DependentUpon>202009071816521_init.cs</DependentUpon>
+    <Compile Include="Migrations\202009090828346_refactor.cs" />
+    <Compile Include="Migrations\202009090828346_refactor.designer.cs">
+      <DependentUpon>202009090828346_refactor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009090844375_product_quantity.cs" />
+    <Compile Include="Migrations\202009090844375_product_quantity.designer.cs">
+      <DependentUpon>202009090844375_product_quantity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -653,6 +657,7 @@
     <Content Include="Views\Purchases\Index.cshtml" />
     <Content Include="Views\Ads\ShowMyAds.cshtml" />
     <Content Include="Views\Users\MyOrders.cshtml" />
+    <Content Include="Views\Products\ShowMyProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UserImages\" />
@@ -672,8 +677,11 @@
     <EmbeddedResource Include="Migrations\202009070749534_first.resx">
       <DependentUpon>202009070749534_first.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009071816521_init.resx">
-      <DependentUpon>202009071816521_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202009090828346_refactor.resx">
+      <DependentUpon>202009090828346_refactor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009090844375_product_quantity.resx">
+      <DependentUpon>202009090844375_product_quantity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
