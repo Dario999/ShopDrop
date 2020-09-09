@@ -34,6 +34,13 @@ namespace ShopDrop.Controllers
             return String.Format("{0:X}", fileName.GetHashCode());
 
         }
+
+        private User getCurrentUser()
+        {
+
+            string userId = User.Identity.GetUserId();
+            return db.Users.Where(s => s.user_id == userId).First();
+        }
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
@@ -49,6 +56,7 @@ namespace ShopDrop.Controllers
             return View(product);
         }
 
+        [Authorize]
         // GET: Products/Create
         public ActionResult Create()
         {
@@ -62,15 +70,23 @@ namespace ShopDrop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Price,Quantity,Image,category")] Product product, HttpPostedFileBase ImageFile)
         {
-            
-            
-            string trailingPath = Path.GetFileName(ImageFile.FileName);
-            string extension = Path.GetExtension(ImageFile.FileName);
-            trailingPath = computeHash(trailingPath + User.Identity.Name);
-            trailingPath = DateTime.Now.ToString("yyyy-MM-dd-hh-mm") + "_" +trailingPath + extension;
-            string fullPath = Path.Combine(Server.MapPath("~/UserImages"), trailingPath);
-            product.Image = trailingPath;
-            ImageFile.SaveAs(fullPath);
+
+
+            if (ImageFile != null) {
+                string trailingPath = Path.GetFileName(ImageFile.FileName);
+                string extension = Path.GetExtension(ImageFile.FileName);
+                trailingPath = computeHash(trailingPath + User.Identity.Name);
+                trailingPath = DateTime.Now.ToString("yyyy-MM-dd-hh-mm") + "_" + trailingPath + extension;
+                string fullPath = Path.Combine(Server.MapPath("~/UserImages"), trailingPath);
+                product.Image = trailingPath;
+                ImageFile.SaveAs(fullPath);
+            }
+            else
+            {
+                string placeholder = "placeholder-image.png";
+                product.Image = placeholder;
+            }
+            product.selller_id = getCurrentUser().Id;
 
             if (ModelState.IsValid)
             {
@@ -94,16 +110,40 @@ namespace ShopDrop.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+            if (product.selller_id == getCurrentUser().Id)
+            {
+
+                return View(product);
+            }
+            else return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
         }
 
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Price,Quantity,Image")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,Name,Price,Quantity,Image")] Product product, HttpPostedFileBase ImageFile)
         {
+            
+            if (product.selller_id != getCurrentUser().Id)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+            if (ImageFile != null)
+            {
+                string trailingPath = Path.GetFileName(ImageFile.FileName);
+                string extension = Path.GetExtension(ImageFile.FileName);
+                trailingPath = computeHash(trailingPath + User.Identity.Name);
+                trailingPath = DateTime.Now.ToString("yyyy-MM-dd-hh-mm") + "_" + trailingPath + extension;
+                string fullPath = Path.Combine(Server.MapPath("~/UserImages"), trailingPath);
+                if (trailingPath != product.Image)
+                {
+                    product.Image = trailingPath;
+                    ImageFile.SaveAs(fullPath);
+                }
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
@@ -112,7 +152,7 @@ namespace ShopDrop.Controllers
             }
             return View(product);
         }
-
+        [Authorize]
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -125,15 +165,24 @@ namespace ShopDrop.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+            if (product.selller_id == getCurrentUser().Id)
+            {
+                return View(product);
+            }
+            else return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
         }
 
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
+            if(product.selller_id != getCurrentUser().Id)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -161,12 +210,12 @@ namespace ShopDrop.Controllers
             return RedirectToAction("Index");
         }
 
-
+        
         public ActionResult ShowMyProducts()
         {
             string userId = User.Identity.GetUserId();
             User user = db.Users.Where(s => s.user_id == userId).First();
-            return View(db.Products.Where(s => s.selller_id == user.Id).First());
+            return View(db.Products.Where(s => s.selller_id == user.Id));
         }
 
     }
