@@ -9,6 +9,52 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<table class="table" id="ads_table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="mt-2">
+
+                <td style="width: 30%">
+                    <img src='~/UserImages/@item.Image' class="img-max-size" />
+                </td>
+                <td style="width: 50%; padding-top: 20px">
+                    <div class="row mt-2">
+                        <h5><b>@item.Name</b></h5>
+                    </div>
+                    <div class="row" style="margin-top: 20px">
+                        <span style="font-size: 20px">@item.Price</span>
+                        <span>$</span>
+                    </div>
+                </td>
+                <td style="width: 20%; padding-top: 20px; padding-left: 30px">
+                    <div class="btn-group">
+                        <button class="btn btn-secondary">
+                            @Html.ActionLink("Details", "Details", new { id = item.Id })
+                        </button>
+                        <button class="btn btn-warning">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        </button>
+                        <button class="btn btn-danger">
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
 <table class="table">
     <tr>
         <th>
