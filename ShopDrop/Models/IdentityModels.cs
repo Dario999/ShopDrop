@@ -10,12 +10,10 @@ namespace ShopDrop.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        private ICollection<Ad> ads { get; set; }
         private ICollection<Purchase> purchases { get; set; }
         
         public ApplicationUser()
         {
-            ads = new List<Ad>();
             purchases = new List<Purchase>();
         }
 
@@ -41,7 +39,6 @@ namespace ShopDrop.Models
         }
 
         public DbSet<Product> Products { get; set; }
-        public DbSet<Ad> Ads { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public new DbSet<User> Users { get; set; }
 
