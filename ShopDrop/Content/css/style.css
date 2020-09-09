@@ -87,6 +87,10 @@ img {
 	max-width: 100%;
 }
 
+.img-max-size {
+	max-width: 250px;
+}
+
 input:focus,
 select:focus,
 button:focus,
