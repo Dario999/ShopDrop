@@ -28,9 +28,9 @@ namespace ShopDrop.Controllers
             return View(db.Products.ToList());
         }
 
-        public ActionResult ListByCategory(Product model)
+        public ActionResult ListByCategory(String Category)
         {
-            return View("Index", db.Products.ToList().FindAll(x => x.category == model.category));
+            return View("Index", db.Products.ToList().FindAll(x => x.category == Category));
         }
 
         private String computeHash(String fileName)
@@ -64,6 +64,7 @@ namespace ShopDrop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "Id,Name,Price,Quantity,Image,category")] Product product, HttpPostedFileBase ImageFile)
         {
 
@@ -74,6 +75,7 @@ namespace ShopDrop.Controllers
             trailingPath = DateTime.Now.ToString("yyyy-MM-dd-hh-mm") + "_" + trailingPath + extension;
             string fullPath = Path.Combine(Server.MapPath("~/UserImages"), trailingPath);
             product.Image = trailingPath;
+            product.selller_id = User.Identity.GetUserId();
             ImageFile.SaveAs(fullPath);
 
             if (ModelState.IsValid)
@@ -153,12 +155,12 @@ namespace ShopDrop.Controllers
         }
 
 
-        public ActionResult ShowMyProducts()
-        {
-            string userId = User.Identity.GetUserId();
-            User user = db.Users.Where(s => s.user_id == userId).First();
-            return View(db.Products.Where(s => s.selller_id == user.Id));
-        }
+        //public ActionResult ShowMyProducts()
+        //{
+          //  string userId = User.Identity.GetUserId();
+            //User user = db.Users.Where(s => s.user_id == userId).First();
+            //return View(db.Products.Where(s => s.selller_id == user.Id));
+        //}
 
     }
 }

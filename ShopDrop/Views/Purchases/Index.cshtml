@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table" id="tabela">
+<table class="table" id="table">
     <thead>
         <tr>
             <th>
@@ -33,15 +33,12 @@
             </tr>
         }
     </tbody>
-
-
 </table>
 
-@section Scripts {
 
+
+@section scripts{
     <script>
-        var table = $("#tabela").DataTable();
+        var table = $("#table").DataTable();
     </script>
-
-
 }
