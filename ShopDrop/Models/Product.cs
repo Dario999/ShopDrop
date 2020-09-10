@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +18,7 @@ namespace ShopDrop.Models
         public string Image { get; set; }
         public string category { get; set; }
         public DateTime date_posted { get; set; }
-        public int selller_id { get; set; }
+        public string selller_id { get; set; }
         public Product()
         {
             date_posted = DateTime.Now;
