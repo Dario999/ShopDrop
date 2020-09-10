@@ -24,16 +24,31 @@ namespace ShopDrop.Controllers
 
             ViewBag.seller = @User.Identity.GetUserName();
 
-            List<string> list_categories = new List<string>();
-            list_categories.Add("Laptops");
-            list_categories.Add("Cars");
-            ViewBag.Categories = list_categories;
+
             return View(db.Products.ToList());
         }
 
         public ActionResult ListByCategory(String Category)
         {
+            if(Category == "All")
+            {
+                return View("Index",db.Products.ToList());
+            }
             return View("Index", db.Products.ToList().FindAll(x => x.category == Category));
+        }
+
+
+        public ActionResult ListByCategoryAndSearch(String Category,String text)
+        {
+            if (Category == "All")
+            {
+                if(text == "")
+                {
+                    return View("Index", db.Products.ToList());
+                }
+                return View("Index", db.Products.Where(x => x.Name.ToLower().Contains(text.ToLower())).ToList());
+            }
+            return View("Index", db.Products.ToList().FindAll(x => x.category == Category && x.Name.ToLower().Contains(text.ToLower())));
         }
 
         private String computeHash(String fileName)

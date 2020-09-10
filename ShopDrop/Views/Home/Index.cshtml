@@ -17,7 +17,7 @@
 
     <body>
 
-    <section class="hero set-bg" data-setbg="../../Content/img/background99.jpg" style="height: 1000px">
+        <section class="hero set-bg" data-setbg="../../Content/img/background99.jpg" style="height: 1000px">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -29,17 +29,19 @@
                             </div>
                             <div class="hero__search__form">
                                 <form action="#">
-                                    <input type="text" placeholder="Search..." style="margin-left: 200px;" class="form-control">
-                                    <div class="select__option" style="margin-left: 10px;" >
-                                        <select class="form-control">
-                                            <option value="" class="form-control">Choose Categories</option>
-                                            <option value="Laptops" class="form-control">Laptops</option>
-                                            <option value="Phone" class="form-control">Phone</option>
-                                            <option value="Monitor" class="form-control">Monitor</option>
-                                            <option value="Mouse" class="form-control">Mouse</option>
+                                    <input type="text" placeholder="Search..." id="search_holder"style="margin-left: 200px;" class="form-control">
+                                    <div class="select__option" style="margin-left: 10px;">
+                                        <select class="form-control" id="selected_category">
+                                            <option value="All" name="None">All</option>
+                                            <option value="Laptop" name="Laptop">Laptops</option>
+                                            <option value="Phone" name="Phone">Phone</option>
+                                            <option value="Monitor" name="Monitor">Monitor</option>
+                                            <option value="Mouse" name="Mouse">Mouse</option>
                                         </select>
                                     </div>
-                                    <button type="submit"  class="form-control" style="margin-left: 10px;">Search Now</button>
+                                    <button type="submit" class="form-control" style="margin-left: 10px;" id="search_button" onclick="myFunction()">
+                                        <a href="/Products/Index" id="search_link">Search Now</a>
+                                    </button>
                                 </form>
                             </div>
                             <ul class="hero__categories__tags">
@@ -62,4 +64,21 @@
         <script src="../../Content/js/jquery.slicknav.js"></script>
         <script src="../../Content/js/owl.carousel.min.js"></script>
         <script src="../../Content/js/main.js"></script>
+        <script>
+
+            function myFunction() {
+
+                var sel_category = document.getElementById('selected_category');
+                var search_text = document.getElementById('search_holder');
+
+                
+                console.log(sel_category);
+                document.getElementById('search_link').href = "/Products/ListByCategoryAndSearch?Category=" + sel_category.value + "&text=" + search_text.value;
+                
+            }
+
+
+        </script>
+
+
     </body>
