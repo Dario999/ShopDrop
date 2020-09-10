@@ -4,15 +4,18 @@
     ViewBag.Title = "MyOrders";
 }
 
-<h2>MyOrders</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="container" style="padding-top: 30px">
+    <h2>MyOrders</h2>
 
-<p>
-    @Model.user_id
-    @User.Identity.Name
-</p>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 
+    <p>
+        @Model.user_id
+        @User.Identity.Name
+    </p>
+
+</div>
 
