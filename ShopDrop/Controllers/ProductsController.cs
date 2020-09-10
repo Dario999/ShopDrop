@@ -36,10 +36,6 @@ namespace ShopDrop.Controllers
             return View("Index", db.Products.ToList().FindAll(x => x.category == Category));
         }
 
-        public ActionResult ShowMyProducts()
-        {
-            return View(db.Products.ToList());
-        }
 
         public ActionResult ListByCategoryAndSearch(String Category,String text)
         {

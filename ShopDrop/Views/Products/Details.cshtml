@@ -5,31 +5,32 @@
 }
 
 
-    <div class="container" style="padding-top: 40px">
+<div class="container" style="padding-top: 40px">
 
-        <div class="row">
+    <div class="row">
 
-            <div class="col-4" style="max-height: 400px;max-width: 400px">
-                <img src='~/UserImages/@Model.Image' />
-            </div>
-
-          <div class="col-6">
-              <h2>Product details:</h2>
-              <br />
-              <h5>@Model.Name</h5>
-              <br />
-              <p>@Model.Price $</p>
-              <p>On stock: @Model.Quantity</p>
-              <br />
-              <button class="btn btn-danger">@Html.ActionLink("Order Now", "NewOrder", "Purchases", new { productId = Model.Id} , null)</button>
-
+        <div class="col-4" style="max-height: 400px;max-width: 400px">
+            <img src='~/UserImages/@Model.Image' />
         </div>
 
-
-        <br />
-        <p>
-            @Html.ActionLink("Back to List", "Index")
-        </p>
+        <div class="col-6">
+            <h2>Product details:</h2>
+            <br />
+            <h5>@Model.Name</h5>
+            <br />
+            <p>@Model.Price $</p>
+            <p>On stock: @Model.Quantity</p>
+            <br />
+            <button class="btn btn-danger">@Html.ActionLink("Order Now", "NewOrder", "Purchases", new { productId = Model.Id} , null)</button>
 
     </div>
+
+
+    <br />
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+    </div>
+</div>
 

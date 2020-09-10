@@ -44,12 +44,7 @@
 
     <br />
     <br />
-    @if (Request.IsAuthenticated)
-    {
-        <button class="btn btn-primary" style="float: right">
-            @Html.ActionLink("Create new product", "Create", null, new {@style = "color: white;"})
-        </button>
-    }
+
 
     @if (Request.IsAuthenticated)
     {
