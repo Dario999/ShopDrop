@@ -6,10 +6,6 @@
 @{
     ViewBag.Title = "Index";
 }
-<label>@User.Identity.Name</label>
-<h2>User name </h2>
-
-<h3>@User.Identity.GetUserName()</h3>
 
 
 <head>
@@ -24,25 +20,107 @@
 </head>
 
 
-<div class="hero__search__form">
+<div class="container" style="margin-top: 50px">
+    <div class="hero__search__form">
 
-    <form method="post">
-        <input type="text" placeholder="Search..." style="width: 600px" class="form-control">
-        <div class="select__option" style="margin-left: 10px;">
-            <select class="form-control" id="select_category">
-                <option value="None" name="None" class="form-control">-</option>
-                <option value="Laptop" name="Laptop" class="form-control">Laptops</option>
-                <option value="Phone" name="Phone" class="form-control">Phone</option>
-                <option value="Monitor" name="Monitor" class="form-control">Monitor</option>
-                <option value="Mouse" name="Mouse" class="form-control">Mouse</option>
-            </select>
-        </div>
-        <button id="search_button">
-            @Html.ActionLink("Search", "ListByCategory", new { Category = "#select_category" })
-        </button>
-    </form>
+        <form method="post">
+            <input type="text" placeholder="Search..." style="width: 600px" class="form-control">
+            <div class="select__option" style="margin-left: 10px;">
+                <select class="form-control" id="select_category">
+                    <option value="None" name="None" class="form-control">-</option>
+                    <option value="Laptop" name="Laptop" class="form-control">Laptops</option>
+                    <option value="Phone" name="Phone" class="form-control">Phone</option>
+                    <option value="Monitor" name="Monitor" class="form-control">Monitor</option>
+                    <option value="Mouse" name="Mouse" class="form-control">Mouse</option>
+                </select>
+            </div>
+            <button id="search_button">
+                @Html.ActionLink("Search", "ListByCategory", new { Category = "#select_category" })
+            </button>
+        </form>
+
+    </div>
+
+    <table class="table" id="ads_table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.date_posted)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.selller_id)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="mt-2">
+                    <td>
+                        <a href="/Products/Details/@item.Id">@item.Name</a>
+                    </td>
+                    <td style="width: 30%">
+                        @*<img src="@item.Image" style="max-width: 450px; max-height: 250px" />*@
+                        <img src='~/UserImages/@item.Image' style="max-width: 450px; max-height: 250px" />
+                    </td>
+                    <td style="width: 50%; padding-top: 20px">
+                        <span style="font-size: 20px">@item.Price</span>
+                        <span>$</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.date_posted)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.selller_id)
+                    </td>
+                    <td style="width: 20%; padding-top: 20px; padding-left: 30px">
+                        <button class="btn btn-success">
+                            @Html.ActionLink("Details", "Details", new { id = item.Id })
+                        </button>
+                        @if (User.IsInRole("Admin") || @item.selller_id == User.Identity.GetUserId())
+                        {
+                            <button class="btn btn-danger">
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </button>
+                        }
+                        @if (@item.selller_id == User.Identity.GetUserId())
+                        {
+                            <button class="btn btn-light">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                            </button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
 
 </div>
+
 
 <table class="table" id="ads_table">
     <thead>
@@ -123,6 +201,7 @@
 </table>
 
 
+
 @section Scripts {
 
     <script src="../../Content/js/jquery.barfiller.js"></script>
@@ -132,10 +211,10 @@
     <script src="../../Content/js/main.js"></script>
 
     <script>
-            var tabela = $("#ads_table").DataTable();
-            //var category = $("#select_category");
-        //$("#search_button").click(function () {
-        //  console.log("test");
-        //});
+        var tabela = $("#ads_table").DataTable();
+                //var category = $("#select_category");
+            //$("#search_button").click(function () {
+            //  console.log("test");
+            //});
     </script>
 }

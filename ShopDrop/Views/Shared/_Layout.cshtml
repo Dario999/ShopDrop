@@ -20,25 +20,47 @@
     <link rel="stylesheet" href="../../Content/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="../../Content/css/style.css" type="text/css">
 
+    <style>
+        b:hover {
+            color: #131921;
+        }
+    </style>
+
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #131921">
+    <div class="navbar navbar-fixed-top" style="background-color: #131921;height: 70px;">
 
+        <div class="navbar-brand">
+            <span class="navbar-logo">
+                <a>
+                    <img src="~/Content/img/logo2.png" title="" media-simple="true" style="height: 3.8rem;">
+                </a>
+            </span>
+            <span class="navbar-caption-wrap">
+                <a class="navbar-caption text-white" href="/" style="color: #FE525B;font-size: 20px">
+                    ShopDrop
+                </a>
+            </span>
+        </div>
+
+       
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("ShopDrop", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
+            
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Products", "Index", "Products")</li>
-                    <li>@Html.ActionLink("Add new product", "Create", "Products")</li>
+                <ul class="nav navbar-nav" style="padding-top: 10px; ">
+                    <li>
+                        <a class="btn btn-outline-light" href="/Products/Index" style="color: white;font-size: 15px;">
+                            <b>Products</b>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-secondary" href="/Products/Create" style="color: white;font-size: 15px">
+                            <b>Add new product</b>
+                        </a>
+                    </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" style="padding-top: 10px;">
                     @if (Request.IsAuthenticated)
                     {
 
@@ -52,21 +74,23 @@
     </div>
 
 
-    <div class="container body-content">
+    <div>
         @RenderBody()
     </div>
 
-    <footer>
-        <div style="background-color: lightcoral; height: 50px;" class="justify-content-center">
-            <p style="font-weight: bold; margin-left: 650px; font-size: 20px">Shop-Drop &copy;</p>
-        </div>
-    </footer>
+    @*<footer>
+            <div style="background-color: lightcoral; height: 50px;" class="justify-content-center">
+                <p style="font-weight: bold; margin-left: 650px; font-size: 20px">Shop-Drop &copy;</p>
+            </div>
+        </footer>*@
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/js")
 
     @RenderSection("scripts", required: false)
+
 
     <script src="../../Content/js/jquery-3.3.1.min.js"></script>
     <script src="../../Content/js/bootstrap.min.js"></script>

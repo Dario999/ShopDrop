@@ -17,15 +17,15 @@
 
     <body>
 
-    <section class="hero set-bg" data-setbg="../../Content/img/hero/hero-bg.jpg">
+    <section class="hero set-bg" data-setbg="../../Content/img/background99.jpg" style="height: 1000px">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="hero__text">
                             <div class="section-title">
-                                <h2>Discover the opportunity around you!</h2>
-                                <p>Products.Size()
-                                </p>
+
+                                <h2>Find everything you are looking for!</h2>
+                                <p>1,564 543 people shopping here</p>
                             </div>
                             <div class="hero__search__form">
                                 <form action="#">
@@ -33,18 +33,22 @@
                                     <div class="select__option" style="margin-left: 10px;" >
                                         <select class="form-control">
                                             <option value="" class="form-control">Choose Categories</option>
+                                            <option value="Laptops" class="form-control">Laptops</option>
+                                            <option value="Phone" class="form-control">Phone</option>
+                                            <option value="Monitor" class="form-control">Monitor</option>
+                                            <option value="Mouse" class="form-control">Mouse</option>
                                         </select>
                                     </div>
                                     <button type="submit"  class="form-control" style="margin-left: 10px;">Search Now</button>
                                 </form>
                             </div>
                             <ul class="hero__categories__tags">
-                                <li><a href="#"><img src="../../Content/img/hero/cat-1.png" alt=""> Vehicles</a></li>
-                                <li><a href="#"><img src="../../Content/img/hero/cat-2.png" alt=""> Food,Drinks & Cooking</a></li>
-                                <li><a href="#"><img src="../../Content/img/hero/cat-3.png" alt=""> Mobile phones & Multimedia</a></li>
-                                <li><a href="#"><img src="../../Content/img/hero/cat-4.png" alt=""> Jewelery</a></li>
-                                <li><a href="#"><img src="../../Content/img/hero/cat-5.png" alt=""> Home & Apartments</a></li>
-                                <li><a href="#"><img src="../../Content/img/hero/cat-6.png" alt=""> All Categories</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Vehicles"},null)"><img src="../../Content/img/hero/cat-1.png" alt=""> Vehicles</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Jewelery"},null)"><img src="../../Content/img/hero/cat-2.png" alt=""> Food,Drinks & Cooking</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Mobile"},null)"><img src="../../Content/img/hero/cat-3.png" alt=""> Mobile phones & Multimedia</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Jewelery"},null)"><img src="../../Content/img/hero/cat-4.png" alt=""> Jewelery</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Home"},null)"><img src="../../Content/img/hero/cat-5.png" alt=""> Home & Apartments</a></li>
+                                <li><a href="@Url.Action("Index","Products")"><img src="../../Content/img/hero/cat-6.png" alt=""> All Categories</a></li>
                             </ul>
                         </div>
                     </div>
