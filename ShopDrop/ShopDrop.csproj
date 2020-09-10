@@ -177,21 +177,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202009091911478_initial.cs" />
-    <Compile Include="Migrations\202009091911478_initial.designer.cs">
-      <DependentUpon>202009091911478_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009091916124_second.cs" />
-    <Compile Include="Migrations\202009091916124_second.designer.cs">
-      <DependentUpon>202009091916124_second.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009100851530_third.cs" />
-    <Compile Include="Migrations\202009100851530_third.designer.cs">
-      <DependentUpon>202009100851530_third.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009101105104_forth.cs" />
-    <Compile Include="Migrations\202009101105104_forth.designer.cs">
-      <DependentUpon>202009101105104_forth.cs</DependentUpon>
+    <Compile Include="Migrations\202009101219157_FIRST1.cs" />
+    <Compile Include="Migrations\202009101219157_FIRST1.designer.cs">
+      <DependentUpon>202009101219157_FIRST1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -678,17 +666,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202009091911478_initial.resx">
-      <DependentUpon>202009091911478_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009091916124_second.resx">
-      <DependentUpon>202009091916124_second.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009100851530_third.resx">
-      <DependentUpon>202009100851530_third.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009101105104_forth.resx">
-      <DependentUpon>202009101105104_forth.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202009101219157_FIRST1.resx">
+      <DependentUpon>202009101219157_FIRST1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
