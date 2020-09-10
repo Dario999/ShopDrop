@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity;
+@model IEnumerable<ShopDrop.Models.Product>
 
 <!DOCTYPE html>
 <html>
@@ -44,31 +45,40 @@
             </span>
         </div>
 
-       
+
         <div class="container">
-            
+
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav" style="padding-top: 10px; ">
                     <li>
                         <a class="btn btn-outline-light" href="/Products/Index" style="color: white;font-size: 15px;">
-                            <b>Products</b>
+                            <b>All products</b>
                         </a>
                     </li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>
+                            <a class="btn btn-outline-light" href="/Products/ShowMyProducts" style="color: white; font-size: 15px;">
+                                <b>My products</b>
+                            </a>
+                        </li>
+                    }
                     <li>
                         <a class="btn btn-secondary" href="/Products/Create" style="color: white;font-size: 15px">
                             <b>Add new product</b>
                         </a>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right" style="padding-top: 10px;">
+                <ul class="nav navbar-nav navbar-right">
                     @if (Request.IsAuthenticated)
                     {
-
-                        <li>@Html.ActionLink("My Orders", "Orders", "Purchases", new { id = User.Identity.GetUserId() }, null)</li>
-
+                        <li>@Html.ActionLink("My Orders", "Orders", "Purchases", new { id = User.Identity.GetUserId() }, new { @style = "margin-top:10px;" })</li>
                     }
+                <li>@Html.Partial("_LoginPartial")</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+               
+                
+
             </div>
         </div>
     </div>
