@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
@@ -177,21 +177,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202009091911478_initial.cs" />
-    <Compile Include="Migrations\202009091911478_initial.designer.cs">
-      <DependentUpon>202009091911478_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009091916124_second.cs" />
-    <Compile Include="Migrations\202009091916124_second.designer.cs">
-      <DependentUpon>202009091916124_second.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009100851530_third.cs" />
-    <Compile Include="Migrations\202009100851530_third.designer.cs">
-      <DependentUpon>202009100851530_third.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009101105104_forth.cs" />
-    <Compile Include="Migrations\202009101105104_forth.designer.cs">
-      <DependentUpon>202009101105104_forth.cs</DependentUpon>
+    <Compile Include="Migrations\202009101219157_FIRST1.cs" />
+    <Compile Include="Migrations\202009101219157_FIRST1.designer.cs">
+      <DependentUpon>202009101219157_FIRST1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -654,14 +642,13 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="Views\Purchases\Create.cshtml" />
     <Content Include="Views\Purchases\Delete.cshtml" />
     <Content Include="Views\Purchases\Details.cshtml" />
-    <Content Include="Views\Purchases\Edit.cshtml" />
-    <Content Include="Views\Purchases\Index.cshtml" />
     <Content Include="Views\Users\MyOrders.cshtml" />
     <Content Include="Views\Products\ShowMyProducts.cshtml" />
     <Content Include="Views\Purchases\Orders.cshtml" />
+    <Content Include="Views\Purchases\NewOrder.cshtml" />
+    <Content Include="Views\Purchases\SuccessfulPurchase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UserImages\" />
@@ -678,17 +665,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202009091911478_initial.resx">
-      <DependentUpon>202009091911478_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009091916124_second.resx">
-      <DependentUpon>202009091916124_second.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009100851530_third.resx">
-      <DependentUpon>202009100851530_third.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009101105104_forth.resx">
-      <DependentUpon>202009101105104_forth.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202009101219157_FIRST1.resx">
+      <DependentUpon>202009101219157_FIRST1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

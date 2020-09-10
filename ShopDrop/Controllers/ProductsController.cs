@@ -86,17 +86,23 @@ namespace ShopDrop.Controllers
         public ActionResult Create([Bind(Include = "Id,Name,Price,Quantity,Image,category")] Product product, HttpPostedFileBase ImageFile)
         {
 
+            if (ImageFile != null)
+            {
+                string trailingPath = Path.GetFileName(ImageFile.FileName);
+                string extension = Path.GetExtension(ImageFile.FileName);
+                trailingPath = computeHash(trailingPath + User.Identity.Name);
+                trailingPath = DateTime.Now.ToString("yyyy-MM-dd-hh-mm") + "_" + trailingPath + extension;
+                string fullPath = Path.Combine(Server.MapPath("~/UserImages"), trailingPath);
+                product.Image = trailingPath;
+                product.selller_id = User.Identity.GetUserId();
+                product.sellerName = User.Identity.GetUserName();
+                ImageFile.SaveAs(fullPath);
 
-            string trailingPath = Path.GetFileName(ImageFile.FileName);
-            string extension = Path.GetExtension(ImageFile.FileName);
-            trailingPath = computeHash(trailingPath + User.Identity.Name);
-            trailingPath = DateTime.Now.ToString("yyyy-MM-dd-hh-mm") + "_" + trailingPath + extension;
-            string fullPath = Path.Combine(Server.MapPath("~/UserImages"), trailingPath);
-            product.Image = trailingPath;
-            product.selller_id = User.Identity.GetUserId();
-            product.sellerName = User.Identity.GetUserName();
-            ImageFile.SaveAs(fullPath);
-
+            }
+            else
+            {
+                product.Image = "placeholder-image.png";
+            }
             if (ModelState.IsValid)
             {
                 db.Products.Add(product);
@@ -119,6 +125,10 @@ namespace ShopDrop.Controllers
             {
                 return HttpNotFound();
             }
+            if(product.selller_id != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             return View(product);
         }
 
@@ -127,8 +137,24 @@ namespace ShopDrop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Price,Quantity,Image")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,Name,Price,Quantity,Image")] Product product, HttpPostedFileBase ImageFile)
         {
+            if (product.selller_id != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+            if (ImageFile != null)
+            {
+                string trailingPath = Path.GetFileName(ImageFile.FileName);
+                string extension = Path.GetExtension(ImageFile.FileName);
+                trailingPath = computeHash(trailingPath + User.Identity.Name);
+                trailingPath = DateTime.Now.ToString("yyyy-MM-dd-hh-mm") + "_" + trailingPath + extension;
+                string fullPath = Path.Combine(Server.MapPath("~/UserImages"), trailingPath);
+                product.Image = trailingPath;
+                product.selller_id = User.Identity.GetUserId();
+                product.sellerName = User.Identity.GetUserName();
+                ImageFile.SaveAs(fullPath);
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
@@ -150,6 +176,7 @@ namespace ShopDrop.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(product);
         }
 
@@ -159,6 +186,10 @@ namespace ShopDrop.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
+            if (product.selller_id != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -14,6 +14,7 @@ namespace ShopDrop.Models
         public string buyer_id { get; set; }
         public string seller_id { get; set; }
         public Product product { get; set; }
+        public int quanityBought { get; set; }
 
     }
 }

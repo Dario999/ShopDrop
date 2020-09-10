@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using ShopDrop.Models;
 
 namespace ShopDrop.Controllers
@@ -35,11 +36,7 @@ namespace ShopDrop.Controllers
             return View(purchase);
         }
 
-        // GET: Purchases/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+       
 
         public ActionResult Orders(string id)
         {
@@ -52,54 +49,53 @@ namespace ShopDrop.Controllers
             return View("Orders", products);
         }
 
-        // POST: Purchases/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,buyer_id")] Purchase purchase)
+        
+        public ActionResult NewOrder(int productId)
         {
-            if (ModelState.IsValid)
-            {
-                db.Purchases.Add(purchase);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(purchase);
-        }
-
-        // GET: Purchases/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
+            Product product = db.Products.Find(productId);
+            if(product.selller_id == User.Identity.GetUserId())
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Purchase purchase = db.Purchases.Find(id);
-            if (purchase == null)
-            {
-                return HttpNotFound();
-            }
-            return View(purchase);
+            return View(product);
         }
 
-        // POST: Purchases/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,buyer_id")] Purchase purchase)
+        public ActionResult NewOrder(int productId, int quantity)
         {
-            if (ModelState.IsValid)
+            System.Diagnostics.Debug.WriteLine("product:" + productId);
+            System.Diagnostics.Debug.WriteLine("quan:" + quantity);
+            Product product = db.Products.Find(productId);
+            if (quantity > product.Quantity)
             {
-                db.Entry(purchase).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(purchase);
-        }
 
+            string user_id = User.Identity.GetUserId();
+            User user = db.Users.Where(m => m.user_id.Equals(user_id)).First();
+
+            if(User.Identity.GetUserId() == product.selller_id)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if(user.balance < product.Price * quantity)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Purchase purchase = new Purchase();
+            purchase.seller_id = product.selller_id;
+            purchase.buyer_id = user.user_id;
+            purchase.product = product;
+            purchase.quanityBought = quantity;
+            db.Purchases.Add(purchase);
+            product.Quantity -= quantity;
+            user.balance -= quantity * product.Price;
+            db.SaveChanges();
+
+            return View("SuccessfulPurchase", purchase);
+        }
+       
         // GET: Purchases/Delete/5
         public ActionResult Delete(int? id)
         {
