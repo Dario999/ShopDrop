@@ -8,20 +8,6 @@
         public override void Up()
         {
             CreateTable(
-                "dbo.Ads",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        date_posted = c.DateTime(nullable: false),
-                        is_sold = c.Boolean(nullable: false),
-                        seller_id = c.String(),
-                        product_Id = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Products", t => t.product_Id)
-                .Index(t => t.product_Id);
-            
-            CreateTable(
                 "dbo.Products",
                 c => new
                     {
@@ -32,7 +18,8 @@
                         Image = c.String(),
                         category = c.String(),
                         date_posted = c.DateTime(nullable: false),
-                        selller_id = c.Int(nullable: false),
+                        selller_id = c.String(),
+                        sellerName = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -43,6 +30,7 @@
                         id = c.Int(nullable: false, identity: true),
                         buyer_id = c.String(),
                         seller_id = c.String(),
+                        quanityBought = c.Int(nullable: false),
                         product_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.id)
@@ -136,7 +124,6 @@
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Purchases", "product_Id", "dbo.Products");
-            DropForeignKey("dbo.Ads", "product_Id", "dbo.Products");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
@@ -144,7 +131,6 @@
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Purchases", new[] { "product_Id" });
-            DropIndex("dbo.Ads", new[] { "product_Id" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
@@ -153,7 +139,6 @@
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Purchases");
             DropTable("dbo.Products");
-            DropTable("dbo.Ads");
         }
     }
 }

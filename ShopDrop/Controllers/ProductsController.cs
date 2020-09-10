@@ -21,13 +21,12 @@ namespace ShopDrop.Controllers
         // GET: Products
         public ActionResult Index()
         {
-
-            ViewBag.seller = @User.Identity.GetUserName();
-
-
             return View(db.Products.ToList());
         }
-
+        public ActionResult ShowMyProducts()
+        {
+            return View(db.Products.ToList());
+        }
         public ActionResult ListByCategory(String Category)
         {
             if(Category == "All")
