@@ -19,6 +19,8 @@ namespace ShopDrop.Models
         public string category { get; set; }
         public DateTime date_posted { get; set; }
         public string selller_id { get; set; }
+        public string sellerName { get; set; }
+
         public Product()
         {
             date_posted = DateTime.Now;

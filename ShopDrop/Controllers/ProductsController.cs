@@ -21,6 +21,9 @@ namespace ShopDrop.Controllers
         // GET: Products
         public ActionResult Index()
         {
+
+            ViewBag.seller = @User.Identity.GetUserName();
+
             List<string> list_categories = new List<string>();
             list_categories.Add("Laptops");
             list_categories.Add("Cars");
@@ -76,6 +79,7 @@ namespace ShopDrop.Controllers
             string fullPath = Path.Combine(Server.MapPath("~/UserImages"), trailingPath);
             product.Image = trailingPath;
             product.selller_id = User.Identity.GetUserId();
+            product.sellerName = User.Identity.GetUserName();
             ImageFile.SaveAs(fullPath);
 
             if (ModelState.IsValid)
