@@ -25,7 +25,7 @@
 
 <div class="hero__search__form">
 
-    <form method="get">
+    <form method="post">
         <input type="text" placeholder="Search..." style="width: 600px" class="form-control">
         <div class="select__option" style="margin-left: 10px;">
             <select class="form-control" id="select_category">
@@ -43,8 +43,6 @@
 
 </div>
 
-
-
 <table class="table" id="ads_table">
     <thead>
         <tr>
@@ -52,35 +50,72 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date_posted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.selller_id)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr class="mt-2">
-
-                <td style="width: 30%">
-                    @*<img src="@item.Image" style="max-width: 450px; max-height: 250px" />*@
-                    <img src='~/UserImages/@item.Image' style="max-width: 450px; max-height: 250px" />
-                </td>
-                <td style="width: 50%; padding-top: 20px">
-                    <div class="row mt-2">
-                        <h5><b>@item.Name</b></h5>
-                    </div>
-                    <div class="row" style="margin-top: 20px">
-                        <span style="font-size: 20px">@item.Price</span>
-                        <span>$</span>
-                    </div>
-                </td>
-                <td style="width: 20%; padding-top: 20px; padding-left: 30px">
-                    <button class="btn btn-danger">
+        <tr class="mt-2">
+            <td>
+                <a href="/Products/Details/@item.Id">@item.Name</a>
+            </td>
+            <td style="width: 30%">
+                @*<img src="@item.Image" style="max-width: 450px; max-height: 250px" />*@
+                <img src='~/UserImages/@item.Image' style="max-width: 450px; max-height: 250px" />
+            </td>
+            <td style="width: 50%; padding-top: 20px">
+                    <span style="font-size: 20px">@item.Price</span>
+                    <span>$</span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_posted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.selller_id)
+            </td>
+            <td style="width: 20%; padding-top: 20px; padding-left: 30px">
+                    <button class="btn btn-success">
                         @Html.ActionLink("Details", "Details", new { id = item.Id })
                     </button>
-
-                </td>
-            </tr>
+                @if (User.IsInRole("Admin") || @item.selller_id == User.Identity.GetUserId())
+                {
+                    <button class="btn btn-danger">
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </button>
+                }
+                @if (@item.selller_id == User.Identity.GetUserId())
+                {
+                    <button class="btn btn-light">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    </button>
+                }
+            </td>
+        </tr>
         }
     </tbody>
 
@@ -96,11 +131,10 @@
     <script src="../../Content/js/main.js"></script>
 
     <script>
-        var category = $("#select_category");
-        $("#search_button").click(function () {
-            console.log("test");
-        });
+            var tabela = $("#ads_table").DataTable();
+            //var category = $("#select_category");
+        //$("#search_button").click(function () {
+        //  console.log("test");
+        //});
     </script>
-
-
 }

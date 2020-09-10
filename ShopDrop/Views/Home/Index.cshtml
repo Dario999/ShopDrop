@@ -1,4 +1,7 @@
-﻿@{
+﻿@using ShopDrop.Models
+@model ShopDrop.Models.Product
+
+@{
     ViewBag.Title = "Home Page";
 }
     <head>
@@ -21,7 +24,8 @@
                         <div class="hero__text">
                             <div class="section-title">
                                 <h2>Discover the opportunity around you!</h2>
-                                <p>Ads.size() here</p>
+                                <p>Products.Size()
+                                </p>
                             </div>
                             <div class="hero__search__form">
                                 <form action="#">
