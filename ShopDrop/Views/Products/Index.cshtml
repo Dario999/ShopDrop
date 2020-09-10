@@ -1,5 +1,8 @@
 ﻿@using Microsoft.AspNet.Identity;
 
+
+@using ShopDrop.Models
+
 @model IEnumerable<ShopDrop.Models.Product>
 
 @{
@@ -8,7 +11,12 @@
 
 <h2>User name </h2>
 
+
 <h3>@User.Identity.GetUserName()</h3>
+
+<br/>
+
+
 
 
 <head>
@@ -23,68 +31,73 @@
 </head>
 
 
-<div class="hero__search__form">
+<div class="container">
+    <div>
 
-    <form method="get">
-        <input type="text" placeholder="Search..." style="width: 600px" class="form-control">
-        <div class="select__option" style="margin-left: 10px;">
-            <select class="form-control" id="select_category">
-                <option value="None" name="None" class="form-control">-</option>
-                <option value="Laptop" name="Laptop" class="form-control">Laptops</option>
-                <option value="Phone" name="Phone" class="form-control">Phone</option>
-                <option value="Monitor" name="Monitor" class="form-control">Monitor</option>
-                <option value="Mouse" name="Mouse" class="form-control">Mouse</option>
-            </select>
-        </div>
-        <button id="search_button">
-            @Html.ActionLink("Search", "ListByCategory", new { Category = "#select_category" })
-        </button>
-    </form>
+        <form method="get">
+            <div>
+                <input type="text" placeholder="Search..." class="form-control">
+            </div>
+            <div>
+                @Html.DropDownList("Categories",
+                        new SelectList(ViewBag.Categories))
+            </div>
+
+
+
+
+            <button id="search_button" class="form-control btn btn-success">
+                @Html.ActionLink("Search", "ListByCategory", new { Category = "Laptop" })
+            </button>
+
+        </form>
+
+    </div>
+
+
+
+    <table class="table" id="ads_table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="mt-2">
+
+                    <td style="width: 30%">
+                        @*<img src="@item.Image" style="max-width: 450px; max-height: 250px" />*@
+                        <img src='~/UserImages/@item.Image' style="max-width: 450px; max-height: 250px" />
+                    </td>
+                    <td style="width: 50%; padding-top: 20px">
+                        <div class="row mt-2">
+                            <h5><b>@item.Name</b></h5>
+                        </div>
+                        <div class="row" style="margin-top: 20px">
+                            <span style="font-size: 20px">@item.Price</span>
+                            <span>$</span>
+                        </div>
+                    </td>
+                    <td style="width: 20%; padding-top: 20px; padding-left: 30px">
+                        <button class="btn btn-danger">
+                            @Html.ActionLink("Details", "Details", new { id = item.Id })
+                        </button>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
 
 </div>
-
-
-
-<table class="table" id="ads_table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr class="mt-2">
-
-                <td style="width: 30%">
-                    @*<img src="@item.Image" style="max-width: 450px; max-height: 250px" />*@
-                    <img src='~/UserImages/@item.Image' style="max-width: 450px; max-height: 250px" />
-                </td>
-                <td style="width: 50%; padding-top: 20px">
-                    <div class="row mt-2">
-                        <h5><b>@item.Name</b></h5>
-                    </div>
-                    <div class="row" style="margin-top: 20px">
-                        <span style="font-size: 20px">@item.Price</span>
-                        <span>$</span>
-                    </div>
-                </td>
-                <td style="width: 20%; padding-top: 20px; padding-left: 30px">
-                    <button class="btn btn-danger">
-                        @Html.ActionLink("Details", "Details", new { id = item.Id })
-                    </button>
-
-                </td>
-            </tr>
-        }
-    </tbody>
-
-</table>
 
 
 @section Scripts {
