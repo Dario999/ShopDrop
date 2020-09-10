@@ -158,6 +158,7 @@ namespace ShopDrop.Controllers
 
                 User u = new User();
                 u.user_id = UserManager.FindByEmail(model.Email).Id;
+                u.balance = 1000;
                 db.Users.Add(u);
                 db.SaveChanges();
 

@@ -21,7 +21,7 @@
             <p>@Model.Price $</p>
             <p>On stock: @Model.Quantity</p>
             <br />
-            <button class="btn btn-danger">@Html.ActionLink("Order Now", "MyOrders", "Users", new { user_id = 1 }, null)</button>
+            <button class="btn btn-danger">@Html.ActionLink("Order Now", "NewOrder", "Purchases", new { productId = Model.Id} , null)</button>
         </div>
 
     </div>

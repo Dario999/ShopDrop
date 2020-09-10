@@ -1,0 +1,27 @@
+﻿@model ShopDrop.Models.Purchase
+
+@{
+    ViewBag.Title = "SuccessfulPurchase";
+    var total = Model.quanityBought * Model.product.Price;
+}
+
+<h2>SuccessfulPurchase</h2>
+
+<div>
+    <h4>Purchase</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+         <dd>
+            <span>NAME:</span>
+            @Html.DisplayFor(model => Model.product.Name)
+        </dd>
+        <dd>
+            <p>Total Paid:<span>@total</span></p>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
