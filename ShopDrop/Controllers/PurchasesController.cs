@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -18,7 +19,7 @@ namespace ShopDrop.Controllers
         // GET: Purchases
         public ActionResult Index()
         {
-            return View(db.Purchases.ToList());
+            return View();
         }
 
         // GET: Purchases/Details/5
@@ -38,13 +39,22 @@ namespace ShopDrop.Controllers
 
        
 
-        public ActionResult Orders(string id)
+        public ActionResult Orders()
         {
-            List<Purchase> purchases = db.Purchases.Where(x => x.buyer_id == id).ToList();
+            String user_id = @User.Identity.GetUserId();
+            List<Purchase> purchases = db.Purchases.Where(x => x.buyer_id == user_id).ToList();
             List<Product> products = new List<Product>();
             foreach (Purchase p in purchases)
             {
-                products.Add(p.product);
+                foreach (Product product in db.Products)
+                {
+                    if ((p as Purchase).productId == product.Id)
+                    {
+                        product.Quantity = p.quanityBought;
+                        product.date_posted = DateTime.Now;
+                        products.Add(product);
+                    }   
+                }
             }
             return View("Orders", products);
         }
@@ -86,7 +96,7 @@ namespace ShopDrop.Controllers
             Purchase purchase = new Purchase();
             purchase.seller_id = product.selller_id;
             purchase.buyer_id = user.user_id;
-            purchase.product = product;
+            purchase.productId = product.Id;
             purchase.quanityBought = quantity;
             db.Purchases.Add(purchase);
             product.Quantity -= quantity;
