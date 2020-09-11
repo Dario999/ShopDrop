@@ -21,7 +21,7 @@
 
                     </select>
                 </div>
-                <a class="btn btn-danger btn-lg" href="/Products/Index" style="margin-left: 10px;" id="search_link" onclick="myFunction()">Search Now</a>
+                <a class="btn btn-danger btn-lg" href="/Products/ShowMyProducts" style="margin-left: 10px;" id="search_link" onclick="myFunction()">Search Now</a>
 
             </form>
         </div>
@@ -114,6 +114,17 @@
                         //$("#search_button").click(function () {
                         //  console.log("test");
                         //});
+
+                function myFunction() {
+
+                    var sel_category = document.getElementById('selected_category');
+                    var search_text = document.getElementById('search_holder');
+
+
+                    console.log(sel_category);
+                    document.getElementById('search_link').href = "/Products/ListByCategoryAndSearchMyProducts?Category=" + sel_category.value + "&text=" + search_text.value;
+
+                }
             </script>
 
 
