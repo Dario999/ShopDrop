@@ -2,26 +2,25 @@
 
 @{
     ViewBag.Title = "SuccessfulPurchase";
-    var total = Model.quanityBought * Model.product.Price;
+    @*var total = Model.quanityBought * Model.product.Price;*@
 }
+    <div class="container" style="margin-top: 50px;">
+        <h2>SuccessfulPurchase</h2>
 
-<h2>SuccessfulPurchase</h2>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
 
-<div>
-    <h4>Purchase</h4>
-    <hr />
-    <dl class="dl-horizontal">
-
-         <dd>
-            <span>NAME:</span>
-            @Html.DisplayFor(model => Model.product.Name)
-        </dd>
-        <dd>
-            <p>Total Paid:<span>@total</span></p>
-        </dd>
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                <dd>
+                    <span>NAME:</span>
+                    @*@Html.DisplayFor(model => Model.product.Name)*@
+                </dd>
+                <dd>
+                    @*<p>Total Paid:<span>@total</span></p>*@
+                </dd>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Back to List", "Index", "Products")
+        </p>
+    </div>
