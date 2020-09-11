@@ -21,19 +21,19 @@ namespace ShopDrop.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View(db.Products.ToList().FindAll(x => x.selller_id != User.Identity.GetUserId()));
+            return View(db.Products.ToList());
         }
-       // public ActionResult ShowMyProducts()
-        //{
-          //  return View(db.Products.ToList());
-        //}
+        public ActionResult ShowMyProducts()
+        {
+            return View(db.Products.ToList());
+        }
         public ActionResult ListByCategory(String Category)
         {
             if(Category == "All")
             {
-                return View("Index",db.Products.ToList().FindAll(x=>x.selller_id!=User.Identity.GetUserId()));
+                return View("Index",db.Products.ToList().FindAll(x=>x.selller_id != @User.Identity.GetUserId()));
             }
-            return View("Index", db.Products.ToList().FindAll(x => x.category == Category && x.selller_id!=User.Identity.GetUserId()));
+            return View("Index", db.Products.ToList().FindAll(x => x.category == Category && x.selller_id != @User.Identity.GetUserId()));
         }
 
 
@@ -43,11 +43,34 @@ namespace ShopDrop.Controllers
             {
                 if(text == "")
                 {
-                    return View("Index", db.Products.ToList().FindAll(x => x.selller_id != User.Identity.GetUserId()));
+                    return View("Index", db.Products.ToList().FindAll(x => x.selller_id != @User.Identity.GetUserId()));
                 }
-                return View("Index", db.Products.Where(x => x.Name.ToLower().Contains(text.ToLower())).ToList().FindAll(x => x.selller_id != User.Identity.GetUserId()));
+                return View("Index", db.Products.Where(x => x.Name.ToLower().Contains(text.ToLower())).ToList().FindAll(x => x.selller_id != @User.Identity.GetUserId()));
             }
-            return View("Index", db.Products.ToList().FindAll(x => x.selller_id!=User.Identity.GetUserId() && x.category == Category && x.Name.ToLower().Contains(text.ToLower())));
+            return View("Index", db.Products.ToList().FindAll(x => x.selller_id != @User.Identity.GetUserId() && x.category == Category && x.Name.ToLower().Contains(text.ToLower())));
+        }
+
+        public ActionResult ListByCategoryMyProducts(String Category)
+        {
+            if (Category == "All")
+            {
+                return View("Index", db.Products.ToList().FindAll(x => x.selller_id == @User.Identity.GetUserId()));
+            }
+            return View("Index", db.Products.ToList().FindAll(x => x.category == Category && x.selller_id == @User.Identity.GetUserId()));
+        }
+
+
+        public ActionResult ListByCategoryAndSearchMyProducts(String Category, String text)
+        {
+            if (Category == "All")
+            {
+                if (text == "")
+                {
+                    return View("ShowMyProducts", db.Products.ToList().FindAll(x => x.selller_id == @User.Identity.GetUserId()));
+                }
+                return View("ShowMyProducts", db.Products.Where(x => x.Name.ToLower().Contains(text.ToLower())).ToList().FindAll(x => x.selller_id == @User.Identity.GetUserId()));
+            }
+            return View("ShowMyProducts", db.Products.ToList().FindAll(x => x.selller_id == @User.Identity.GetUserId() && x.category == Category && x.Name.ToLower().Contains(text.ToLower())));
         }
 
         private String computeHash(String fileName)
@@ -204,13 +227,5 @@ namespace ShopDrop.Controllers
             }
             base.Dispose(disposing);
         }
-
-
-        public ActionResult ShowMyProducts()
-       {
-            string userId = User.Identity.GetUserId();
-            return View("ShowMyProducts", db.Products.ToList().FindAll(x => x.selller_id == userId));
-        }
-
     }
 }
