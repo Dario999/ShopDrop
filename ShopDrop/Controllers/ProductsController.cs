@@ -21,19 +21,19 @@ namespace ShopDrop.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            return View(db.Products.ToList().FindAll(x => x.selller_id != User.Identity.GetUserId()));
         }
-        public ActionResult ShowMyProducts()
-        {
-            return View(db.Products.ToList());
-        }
+       // public ActionResult ShowMyProducts()
+        //{
+          //  return View(db.Products.ToList());
+        //}
         public ActionResult ListByCategory(String Category)
         {
             if(Category == "All")
             {
-                return View("Index",db.Products.ToList());
+                return View("Index",db.Products.ToList().FindAll(x=>x.selller_id!=User.Identity.GetUserId()));
             }
-            return View("Index", db.Products.ToList().FindAll(x => x.category == Category));
+            return View("Index", db.Products.ToList().FindAll(x => x.category == Category && x.selller_id!=User.Identity.GetUserId()));
         }
 
 
@@ -43,11 +43,11 @@ namespace ShopDrop.Controllers
             {
                 if(text == "")
                 {
-                    return View("Index", db.Products.ToList());
+                    return View("Index", db.Products.ToList().FindAll(x => x.selller_id != User.Identity.GetUserId()));
                 }
-                return View("Index", db.Products.Where(x => x.Name.ToLower().Contains(text.ToLower())).ToList());
+                return View("Index", db.Products.Where(x => x.Name.ToLower().Contains(text.ToLower())).ToList().FindAll(x => x.selller_id != User.Identity.GetUserId()));
             }
-            return View("Index", db.Products.ToList().FindAll(x => x.category == Category && x.Name.ToLower().Contains(text.ToLower())));
+            return View("Index", db.Products.ToList().FindAll(x => x.selller_id!=User.Identity.GetUserId() && x.category == Category && x.Name.ToLower().Contains(text.ToLower())));
         }
 
         private String computeHash(String fileName)
@@ -101,6 +101,8 @@ namespace ShopDrop.Controllers
             else
             {
                 product.Image = "placeholder-image.png";
+                product.selller_id = User.Identity.GetUserId();
+                product.sellerName = User.Identity.GetUserName();
             }
             if (ModelState.IsValid)
             {
@@ -204,12 +206,11 @@ namespace ShopDrop.Controllers
         }
 
 
-        //public ActionResult ShowMyProducts()
-        //{
-          //  string userId = User.Identity.GetUserId();
-            //User user = db.Users.Where(s => s.user_id == userId).First();
-            //return View(db.Products.Where(s => s.selller_id == user.Id));
-        //}
+        public ActionResult ShowMyProducts()
+       {
+            string userId = User.Identity.GetUserId();
+            return View("ShowMyProducts", db.Products.ToList().FindAll(x => x.selller_id == userId));
+        }
 
     }
 }

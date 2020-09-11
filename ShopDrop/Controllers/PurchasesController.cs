@@ -84,6 +84,7 @@ namespace ShopDrop.Controllers
 
             string user_id = User.Identity.GetUserId();
             User user = db.Users.Where(m => m.user_id.Equals(user_id)).First();
+            User seller = db.Users.Where(m => m.user_id.Equals(product.selller_id)).First();
 
             if(User.Identity.GetUserId() == product.selller_id)
             {
@@ -101,6 +102,7 @@ namespace ShopDrop.Controllers
             db.Purchases.Add(purchase);
             product.Quantity -= quantity;
             user.balance -= quantity * product.Price;
+            seller.balance += quantity * product.Price;
             db.SaveChanges();
 
             return View("SuccessfulPurchase", purchase);
