@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using ShopDrop.Models;
 
 namespace ShopDrop.Controllers
@@ -35,7 +36,7 @@ namespace ShopDrop.Controllers
             return View(user);
         }
 
-        public ActionResult Order(int? user_id,int? product_id)
+        public ActionResult Order(int? user_id, int? product_id)
         {
 
             return View("MyOrders", db.Users.Find(user_id));
@@ -43,10 +44,33 @@ namespace ShopDrop.Controllers
 
         public ActionResult MyOrders(int? user_id)
         {
-            
+
             return View("MyOrders", db.Users.Find(user_id));
         }
 
+
+        public ActionResult Balance()
+        {
+            string user_id = User.Identity.GetUserId();
+            User user = db.Users.FirstOrDefaultAsync(x => x.user_id == user_id).Result;
+            if (user != null)
+            {
+                return View(user);
+            }
+            else return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddBalance(int balance)
+        {
+            string user_id = User.Identity.GetUserId();
+            User user = db.Users.FirstOrDefaultAsync(x => x.user_id == user_id).Result;
+            user.balance += balance;
+            db.SaveChanges();
+            return View("Balance", user);
+
+        }
         // GET: Users/Create
         public ActionResult Create()
         {

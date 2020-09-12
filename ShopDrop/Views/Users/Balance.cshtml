@@ -1,0 +1,32 @@
+﻿@model ShopDrop.Models.User
+
+<div class="container" style="padding-top: 30px">
+    <div class="form-horizontal">
+
+        <h4>Balance</h4>
+        <hr />
+        <div class="form-group">
+            <label for="bal" class="control-label col-md-2">Current Balance:</label>
+            <div class="col-md-10">
+                <input type="number" name="bal" disabled value="@Model.balance" class="form-control" />
+            </div>
+        </div>
+
+        @using (Html.BeginForm("AddBalance", "Users", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <label for="balance" class="control-label col-md-2">Add Balance:</label>
+                <div class="col-md-10">
+                    <input type="number" name="balance" min="100" step="10" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
