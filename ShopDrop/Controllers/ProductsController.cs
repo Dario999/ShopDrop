@@ -131,7 +131,7 @@ namespace ShopDrop.Controllers
             {
                 db.Products.Add(product);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ShowMyProducts");
             }
 
             return View(product);
@@ -153,6 +153,7 @@ namespace ShopDrop.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
+            
             return View(product);
         }
 
@@ -161,12 +162,15 @@ namespace ShopDrop.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Price,Quantity,Image")] Product product, HttpPostedFileBase ImageFile)
+        [Authorize]
+        public ActionResult Edit([Bind(Include = "Id,Name,Price,Quantity,Image,category")] Product product, HttpPostedFileBase ImageFile)
         {
-            if (product.selller_id != User.Identity.GetUserId())
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
-            }
+            product.selller_id = User.Identity.GetUserId();
+            product.sellerName = User.Identity.GetUserName();
+           // if (product.selller_id != User.Identity.GetUserId())
+            //{
+              //  return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            //}
             if (ImageFile != null)
             {
                 string trailingPath = Path.GetFileName(ImageFile.FileName);
@@ -175,15 +179,19 @@ namespace ShopDrop.Controllers
                 trailingPath = DateTime.Now.ToString("yyyy-MM-dd-hh-mm") + "_" + trailingPath + extension;
                 string fullPath = Path.Combine(Server.MapPath("~/UserImages"), trailingPath);
                 product.Image = trailingPath;
-                product.selller_id = User.Identity.GetUserId();
-                product.sellerName = User.Identity.GetUserName();
+              
                 ImageFile.SaveAs(fullPath);
+            }
+            else {
+                product.Image = "placeholder-image.png";
+               // product.selller_id = User.Identity.GetUserId();
+               // product.sellerName = User.Identity.GetUserName();
             }
             if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ShowMyProducts");
             }
             return View(product);
         }
@@ -216,7 +224,7 @@ namespace ShopDrop.Controllers
             }
             db.Products.Remove(product);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ShowMyProducts");
         }
 
         protected override void Dispose(bool disposing)
