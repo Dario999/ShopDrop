@@ -4,14 +4,24 @@
     ViewBag.Title = "ShowMyProducts";
 }
 
+<style>
+    .hero__search__form form .select__option .nice-select {
+        border-radius: 30px !important;
+        border: 1px solid lightblue !important;
+        justify-content: center;
+        align-items: center;
+        position: center;
+    }
+</style>
 
-    <div class="container" style="margin-top: 50px">
+<section class="hero set-bg" data-setbg="../../Content/img/light4.jpg">
+    <div class="container" style="margin-top: -200px !important;">
 
         <div class="hero__search__form">
             <form action="#">
-                <input type="text" placeholder="Search..." id="search_holder" style="margin-left: 200px;" class="form-control">
+                <input type="text" placeholder="Search..." id="search_holder" style="margin-left: 200px; border: 1px solid black;" class="form-control">
                 <div class="select__option" style="margin-left: 10px;">
-                    <select class="form-control" id="selected_category">
+                    <select class="form-control align-items-center justify-content-center" id="selected_category">
                         <option value="All" name="None">All</option>
                         <option value="Technology" name="Technology">Technology</option>
                         <option value="Beauty Products" name="Beauty Products">Beauty Products</option>
@@ -25,107 +35,75 @@
 
             </form>
         </div>
-
         @if (Request.IsAuthenticated)
         {
-            <button class="btn btn-primary" style="float: right">
+            <button class="btn btn-primary" style="float: right; font-size: 20px;">
                 @Html.ActionLink("Create new product", "Create", null, new { @style = "color: white;" })
             </button>
         }
-        <table class="table" id="tabela">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Price)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Quantity)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Image)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.category)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.date_posted)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.selller_id)
-                    </th>
-                    <th></th>
+        <br />
+        <br />
+        <br />
+        <br />
+        <table class="table" id="ads_table">
 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
+            @foreach (var item in Model)
+            {
+                if (@item.selller_id == User.Identity.GetUserId())
                 {
-                    if (@item.selller_id == User.Identity.GetUserId())
-                    {
-                        <tr class="mt-2">
-                            <td>
-                                <a href="/Products/Details/@item.Id">@item.Name</a>
-                            </td>
-                            <td style="width: 30%">
-                                @*<img src="@item.Image" style="max-width: 450px; max-height: 250px" />*@
-                                <img src='~/UserImages/@item.Image' style="max-width: 450px; max-height: 250px" />
-                            </td>
-                            <td style="width: 50%; padding-top: 20px">
-                                <span style="font-size: 20px">@item.Price</span>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src='~/UserImages/@item.Image' style="max-width: 450px;max-height: 250px" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row" style="font-size: 15px">
+                                <a href="/Products/Details/@item.Id" style="color: black">@item.Name</a>
+                            </div>
+                            <div class="row">
+                                <br />
+                                <span style="font-size: 20px"><b>@item.Price</b></span>
                                 <span>$</span>
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Quantity)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.category)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.date_posted)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.sellerName)
-                            </td>
-                            <td style="width: 20%; padding-top: 20px; padding-left: 30px">
-                                <button class="btn btn-light">
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id })
-                                </button>
-                                <button class="btn btn-danger">
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @style = "color:black" })
-                                </button>
-                                <button class="btn btn-primary">
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @style = "color:white" })
-                                </button>
-                            </td>
-                        </tr>
-                    }
+                            </div>
+                            <div class="row">
+                                <br />
+                                Posted on: <p>@item.date_posted</p>
+                            </div>
+                            <div class="row">
+                                @if (@item.Quantity == 0)
+                                {
+                                    <p style="font-size: 25px; color: red;">Sold!</p>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="/Products/Details/@item.Id" class="btn btn-success" style="float: right">Details</a>
+                        </div>
+                        <div class="col-md-4" style="margin-top: 5px;">
+                            <a href="/Products/Delete/@item.Id" class="btn btn-danger" style="float: right">Delete</a>
+                        </div>
+                        <div class="col-md-4" style="margin-top: 5px;">
+                            <a href="/Products/Edit/@item.Id" class="btn btn-primary" style="float: right">Edit</a>
+                        </div>
+                    </div>
+                    <hr style="border: 1px solid black;" />
                 }
-            </tbody>
+            }
+
         </table>
     </div>
-        @section Scripts {
+</section>
+
+@section Scripts {
 
             <script>
-                var tabela = $("#tabela").DataTable({ searching: false, info: false });
-                        //var category = $("#select_category");
-                        //$("#search_button").click(function () {
-                        //  console.log("test");
-                        //});
-
                 function myFunction() {
 
                     var sel_category = document.getElementById('selected_category');
                     var search_text = document.getElementById('search_holder');
 
-
                     console.log(sel_category);
                     document.getElementById('search_link').href = "/Products/ListByCategoryAndSearchMyProducts?Category=" + sel_category.value + "&text=" + search_text.value;
-
                 }
             </script>
-
-
-        }
+}

@@ -13,7 +13,7 @@ namespace ShopDrop.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202009111012118_initial"; }
+            get { return "202009121602004_initial"; }
         }
         
         string IMigrationMetadata.Source
