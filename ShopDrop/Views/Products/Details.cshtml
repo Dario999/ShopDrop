@@ -31,7 +31,14 @@
 
     <br />
     <p>
-        @Html.ActionLink("Back to List", "Index")
+        @if (User.Identity.GetUserId() != Model.selller_id)
+        {
+            @Html.ActionLink("Back to List", "Index")
+        }
+        else 
+        { 
+            @Html.ActionLink("Back to List","ShowMyProducts")
+        }
     </p>
 
     </div>
