@@ -105,7 +105,7 @@ namespace ShopDrop.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Create([Bind(Include = "Id,Name,Price,Quantity,Image,category")] Product product, HttpPostedFileBase ImageFile)
+        public ActionResult Create([Bind(Include = "Id,Name,Price,Quantity,Image,category,description")] Product product, HttpPostedFileBase ImageFile)
         {
 
             if (ImageFile != null)

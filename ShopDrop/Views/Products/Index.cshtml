@@ -51,75 +51,45 @@
             @Html.ActionLink("Create new product", "Create", null, new { @style = "color: white;" })
         </button>
     }
-
+    <br />
+    <br />
+    <br />
+    <br />
     <table class="table" id="ads_table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Image)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Quantity)
-                </th>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.category)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.date_posted)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.selller_id)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+        
             @foreach (var item in Model)
             {
                 if (@item.selller_id != User.Identity.GetUserId())
                 {
-
-                    <tr class="mt-2">
-                        <td>
-                            <a href="/Products/Details/@item.Id">@item.Name</a>
-                        </td>
-                        <td style="width: 30%">
-                            @*<img src="@item.Image" style="max-width: 450px; max-height: 250px" />*@
+                
+                    <div class="row">
+                        <div class="col-md-4">
                             <img src='~/UserImages/@item.Image' style="max-width: 450px; max-height: 250px" />
-                        </td>
-                        <td style="width: 50%; padding-top: 20px">
-                            <span style="font-size: 20px">@item.Price</span>
-                            <span>$</span>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Quantity)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.category)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.date_posted)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.sellerName)
-                        </td>
-                        <td style="width: 20%; padding-top: 20px; padding-left: 30px">
-                            <button class="btn btn-light">
-                                @Html.ActionLink("Details", "Details", new { id = item.Id })
-                            </button>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row" style="font-size: 15px">
+                                <a href="/Products/Details/@item.Id" style="color: black">@item.Name</a>
+                            </div>
+                            <div class="row">
+                                <br/>
+                                <span style="font-size: 20px"><b>@item.Price</b></span>
+                                <span>$</span>
+                            </div>
+                            <div class="row">
+                                <br/>
+                                Posted on: <p>@item.date_posted</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="/Products/Details/@item.Id" class="btn btn-danger" style="float: right">Details</a>
+                        </div>
+                    </div>
+                    <hr/>
 
-                        </td>
-                    </tr>
                 }
             }
-        </tbody>
+        
 
     </table>
 
@@ -140,7 +110,7 @@
     <script src="../../Content/js/main.js"></script>
 
     <script>
-        var tabela = $("#ads_table").DataTable({ searching: false, info: false});
+        //var tabela = $("#ads_table").DataTable({ searching: false, info: false});
 
         function myFunction() {
 

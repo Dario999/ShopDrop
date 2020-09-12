@@ -20,6 +20,7 @@ namespace ShopDrop.Models
         public DateTime date_posted { get; set; }
         public string selller_id { get; set; }
         public string sellerName { get; set; }
+        public string description { get; set; }
 
         public Product()
         {
