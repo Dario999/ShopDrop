@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
@@ -177,13 +177,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202009111012118_initial.cs" />
-    <Compile Include="Migrations\202009111012118_initial.designer.cs">
-      <DependentUpon>202009111012118_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009121444177_description.cs" />
-    <Compile Include="Migrations\202009121444177_description.designer.cs">
-      <DependentUpon>202009121444177_description.cs</DependentUpon>
+    <Compile Include="Migrations\202009121602004_initial.cs" />
+    <Compile Include="Migrations\202009121602004_initial.designer.cs">
+      <DependentUpon>202009121602004_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -414,6 +410,7 @@
     <Content Include="Content\img\hero\cat-5.png" />
     <Content Include="Content\img\hero\cat-6.png" />
     <Content Include="Content\img\hero\hero-bg.jpg" />
+    <Content Include="Content\img\light4.jpg" />
     <Content Include="Content\img\listing\details\amenities\ame-1.png" />
     <Content Include="Content\img\listing\details\amenities\ame-2.png" />
     <Content Include="Content\img\listing\details\amenities\ame-3.png" />
@@ -448,6 +445,11 @@
     <Content Include="Content\img\listing\list_small_icon-3.png" />
     <Content Include="Content\img\listing\list_small_icon-4.png" />
     <Content Include="Content\img\Logo.png" />
+    <Content Include="Content\img\payment.png" />
+    <Content Include="Content\img\payment1.png" />
+    <Content Include="Content\img\payment2.png" />
+    <Content Include="Content\img\payment3.png" />
+    <Content Include="Content\img\payment4.png" />
     <Content Include="Content\img\team\team-1.jpg" />
     <Content Include="Content\img\team\team-2.jpg" />
     <Content Include="Content\img\team\team-3.jpg" />
@@ -470,6 +472,7 @@
     <Content Include="Content\js\jquery.slicknav.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\owl.carousel.min.js" />
+    <Content Include="Content\img\light.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -618,7 +621,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -646,9 +648,7 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="Views\Purchases\Delete.cshtml" />
     <Content Include="Views\Purchases\Details.cshtml" />
-    <Content Include="Views\Users\MyOrders.cshtml" />
     <Content Include="Views\Products\ShowMyProducts.cshtml" />
     <Content Include="Views\Purchases\Orders.cshtml" />
     <Content Include="Views\Purchases\NewOrder.cshtml" />
@@ -670,11 +670,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202009111012118_initial.resx">
-      <DependentUpon>202009111012118_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009121444177_description.resx">
-      <DependentUpon>202009121444177_description.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202009121602004_initial.resx">
+      <DependentUpon>202009121602004_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

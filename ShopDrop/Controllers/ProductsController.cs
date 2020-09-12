@@ -167,10 +167,7 @@ namespace ShopDrop.Controllers
         {
             product.selller_id = User.Identity.GetUserId();
             product.sellerName = User.Identity.GetUserName();
-           // if (product.selller_id != User.Identity.GetUserId())
-            //{
-              //  return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
-            //}
+      
             if (ImageFile != null)
             {
                 string trailingPath = Path.GetFileName(ImageFile.FileName);
@@ -181,11 +178,6 @@ namespace ShopDrop.Controllers
                 product.Image = trailingPath;
               
                 ImageFile.SaveAs(fullPath);
-            }
-            else {
-                product.Image = "placeholder-image.png";
-               // product.selller_id = User.Identity.GetUserId();
-               // product.sellerName = User.Identity.GetUserName();
             }
             if (ModelState.IsValid)
             {

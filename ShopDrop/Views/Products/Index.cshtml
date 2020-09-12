@@ -6,7 +6,15 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<style>
+    .hero__search__form form .select__option .nice-select {
+        border-radius: 30px !important;
+        border: 1px solid lightblue !important;
+        justify-content: center;
+        align-items: center;
+        position: center;
+    }
+</style>
 
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -19,50 +27,48 @@
     <link rel="stylesheet" href="../../Content/css/style.css" type="text/css">
 </head>
 
+<section class="hero set-bg" data-setbg="../../Content/img/light4.jpg">
 
-<div class="container" style="margin-top: 50px">
+    <div class="container" style="margin-top: -200px !important;"> 
 
-    <div class="hero__search__form">
-        <form action="#">
-            <input type="text" placeholder="Search..." id="search_holder" style="margin-left: 200px;" class="form-control">
-            <div class="select__option" style="margin-left: 10px;">
-                <select class="form-control" id="selected_category">
-                    <option value="All" name="None">All</option>
-                    <option value="Technology" name="Technology">Technology</option>
-                    <option value="Beauty Products" name="Beauty Products">Beauty Products</option>
-                    <option value="Food" name="Food">Food</option>
-                    <option value="Automobile" name="Automobile">Automobile</option>
-                    <option value="Household" name="Household">Household</option>
+        <div class="hero__search__form">
+            <form action="#">
+                <input type="text" placeholder="Search..." id="search_holder" style="margin-left: 200px; border: 1px solid black;" class="form-control">
+                <div class="select__option" style="margin-left: 10px;">
+                    <select class="form-control align-items-center justify-content-center" id="selected_category">
+                        <option value="All" name="None">All</option>
+                        <option value="Technology" name="Technology">Technology</option>
+                        <option value="Beauty Products" name="Beauty Products">Beauty Products</option>
+                        <option value="Food" name="Food">Food</option>
+                        <option value="Automobile" name="Automobile">Automobile</option>
+                        <option value="Household" name="Household">Household</option>
 
-                </select>
-            </div>
-            <a class="btn btn-danger btn-lg" href="/Products/Index" style="margin-left: 10px;" id="search_link" onclick="myFunction()">Search Now</a>
+                    </select>
+                </div>
+                <a class="btn btn-danger btn-lg" href="/Products/Index" style="margin-left: 10px;" id="search_link" onclick="myFunction()">Search Now</a>
 
-        </form>
-    </div>
+            </form>
+        </div>
 
-    <br />
-    <br />
+        <br />
+        <br />
+        @if (Request.IsAuthenticated)
+        {
+            <button class="btn btn-primary" style="float: right; font-size: 20px;">
+                @Html.ActionLink("Create new product", "Create", null, new { @style = "color: white;" })
+            </button>
+        }
+        <br />
+        <br />
+        <br />
+        <br />
+        <table class="table" id="ads_table">
 
-
-    @if (Request.IsAuthenticated)
-    {
-        <button class="btn btn-primary" style="float: right">
-            @Html.ActionLink("Create new product", "Create", null, new { @style = "color: white;" })
-        </button>
-    }
-    <br />
-    <br />
-    <br />
-    <br />
-    <table class="table" id="ads_table">
-
-        
             @foreach (var item in Model)
             {
                 if (@item.selller_id != User.Identity.GetUserId())
                 {
-                
+
                     <div class="row">
                         <div class="col-md-4">
                             <img src='~/UserImages/@item.Image' style="max-width: 450px; max-height: 250px" />
@@ -72,56 +78,47 @@
                                 <a href="/Products/Details/@item.Id" style="color: black">@item.Name</a>
                             </div>
                             <div class="row">
-                                <br/>
+                                <br />
                                 <span style="font-size: 20px"><b>@item.Price</b></span>
                                 <span>$</span>
                             </div>
                             <div class="row">
-                                <br/>
+                                <br />
                                 Posted on: <p>@item.date_posted</p>
+                            </div>
+                            <div class="row">
+                                @if (@item.Quantity == 0)
+                                {
+                                    <p style="font-size: 25px; color: red;">Sold!</p>
+                                }
                             </div>
                         </div>
                         <div class="col-md-4">
                             <a href="/Products/Details/@item.Id" class="btn btn-danger" style="float: right">Details</a>
                         </div>
                     </div>
-                    <hr/>
-
+                    <hr style="border: 1px solid black;" />
                 }
             }
-        
 
-    </table>
-
-</div>
-
-
-
-
+        </table>
+    </div>
+</section>
 
 @section Scripts {
+        <script src="../../Content/js/jquery.barfiller.js"></script>
+        <script src="../../Content/js/jquery.magnific-popup.min.js"></script>
+        <script src="../../Content/js/jquery.slicknav.js"></script>
+        <script src="../../Content/js/owl.carousel.min.js"></script>
+        <script src="../../Content/js/main.js"></script>
 
+        <script>
+            function myFunction() {
 
-
-    <script src="../../Content/js/jquery.barfiller.js"></script>
-    <script src="../../Content/js/jquery.magnific-popup.min.js"></script>
-    <script src="../../Content/js/jquery.slicknav.js"></script>
-    <script src="../../Content/js/owl.carousel.min.js"></script>
-    <script src="../../Content/js/main.js"></script>
-
-    <script>
-        //var tabela = $("#ads_table").DataTable({ searching: false, info: false});
-
-        function myFunction() {
-
-            var sel_category = document.getElementById('selected_category');
-            var search_text = document.getElementById('search_holder');
-
-
-            console.log(sel_category);
-            document.getElementById('search_link').href = "/Products/ListByCategoryAndSearch?Category=" + sel_category.value + "&text=" + search_text.value;
-
-        }
-
-    </script>
+                var sel_category = document.getElementById('selected_category');
+                var search_text = document.getElementById('search_holder');
+                console.log(sel_category);
+                document.getElementById('search_link').href = "/Products/ListByCategoryAndSearch?Category=" + sel_category.value + "&text=" + search_text.value;
+            }
+        </script>
 }
