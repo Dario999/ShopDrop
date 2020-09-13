@@ -4,18 +4,28 @@
 @{
     ViewBag.Title = "Home Page";
 }
-    <head>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet" href="../../Content/css/barfiller.css" type="text/css">
-        <link rel="stylesheet" href="../../Content/css/magnific-popup.css" type="text/css">
-        <link rel="stylesheet" href="../../Content/css/jquery-ui.min.css" type="text/css">
-        <link rel="stylesheet" href="../../Content/css/owl.carousel.min.css" type="text/css">
-        <link rel="stylesheet" href="../../Content/css/slicknav.min.css" type="text/css">
-        <link rel="stylesheet" href="../../Content/css/style.css" type="text/css">
-    </head>
+    <link rel="stylesheet" href="../../Content/css/barfiller.css" type="text/css">
+    <link rel="stylesheet" href="../../Content/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="../../Content/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="../../Content/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../../Content/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../../Content/css/style.css" type="text/css">
+</head>
 
-    <body>
+<style>
+    .hero__search__form form .select__option .nice-select {
+        border-radius: 30px !important;
+        border: 1px solid lightblue !important;
+        justify-content: center;
+        align-items: center;
+        position: center;
+    }
+</style>
+
+<body>
 
         <section class="hero set-bg" data-setbg="../../Content/img/background99.jpg" style="height: 1000px">
             <div class="container">
@@ -29,30 +39,41 @@
                             </div>
                             <div class="hero__search__form">
                                 <form action="#">
-                                    <input type="text" placeholder="Search..." id="search_holder"style="margin-left: 200px;" class="form-control">
+                                    <input type="text" placeholder="Search..." id="search_holder" style="margin-left: 200px; border: 1px solid black;" class="form-control">
                                     <div class="select__option" style="margin-left: 10px;">
-                                        <select class="form-control" id="selected_category">
+                                        <select class="form-control align-items-center justify-content-center" id="selected_category">
                                             <option value="All" name="None">All</option>
+                                            <option value="Vehicles" name="Vehicles">Vehicles</option>
+                                            <option value="Real Estate" name="RealEstate">Real Estate</option>
+                                            <option value="Home and Garden" name="Home and Garden">Home and Garden</option>
                                             <option value="Technology" name="Technology">Technology</option>
-                                            <option value="Beauty Products" name="Beauty Products">Beauty Products</option>
-                                            <option value="Food" name="Food">Food</option>
-                                            <option value="Automobile" name="Automobile">Automobile</option>
-                                            <option value="Household" name="Household">Household</option>
+                                            <option value="Sport Equipment" name="Sport Equipment">Sport Equipment</option>
+                                            <option value="Watches and Jewelry" name="Watches and Jewelry">Watches and Jewelry</option>
+                                            <option value="Books and Literature" name="Books and Literature">Books and Literature</option>
+                                            <option value="Health and Beauty" name="Health and Beauty">Health and Beauty</option>
+                                            <option value="Machnies and Tools" name="Machines and Tools">Machines and Tools</option>
+                                            <option value="Food and Cooking" name="Food and Cooking">Food and Cooking</option>
+                                            <option value="Other" name="Other">Other</option>
 
                                         </select>
                                     </div>
-                                   
-                                        <a class="btn btn-danger btn-lg" href="/Products/Index" style="margin-left: 10px;" id="search_link" onclick="myFunction()">Search Now</a>
-                                    
+
+                                    <a class="btn btn-danger btn-lg" href="/Products/Index" style="margin-left: 10px;" id="search_link" onclick="myFunction()">Search Now</a>
+
                                 </form>
                             </div>
                             <ul class="hero__categories__tags">
-                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Vehicles"},null)"><img src="../../Content/img/hero/cat-1.png" alt=""> Vehicles</a></li>
-                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Jewelery"},null)"><img src="../../Content/img/hero/cat-2.png" alt=""> Food,Drinks & Cooking</a></li>
-                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Mobile"},null)"><img src="../../Content/img/hero/cat-3.png" alt=""> Mobile phones & Multimedia</a></li>
-                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Jewelery"},null)"><img src="../../Content/img/hero/cat-4.png" alt=""> Jewelery</a></li>
-                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Home"},null)"><img src="../../Content/img/hero/cat-5.png" alt=""> Home & Apartments</a></li>
-                                <li><a href="@Url.Action("Index","Products")"><img src="../../Content/img/hero/cat-6.png" alt=""> All Categories</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Vehicles"},null)" style="background-color: whitesmoke; color: black;"><img src="../../Content/img/hero/vehicles.jpg" style="width: 23px; height: 21px;" alt="">Vehicles</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Real Estate"},null)" style="background-color: whitesmoke; color: black;"><img src="../../Content/img/hero/realestate.jpg" style="width: 23px; height: 21px;" alt="">Real Estate</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Home and Garden"},null)" style="background-color: whitesmoke; color: black;"><img src="../../Content/img/hero/home.png" style="width: 23px; height: 21px;" alt="">Home and Garden</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Technology"},null)" style="background-color: whitesmoke; color: black;"><img src="../../Content/img/hero/tech.jpg" style="width: 23px; height: 21px;" alt="">Technology</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Sport Equipment"},null)" style="background-color: whitesmoke; color: black;"><img src="../../Content/img/hero/sport.jpg" style="width: 23px; height: 21px;" alt="">Sport Equipment</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Watches and Jewelry"},null) "style="background-color: whitesmoke; color: black;"><img src="../../Content/img/hero/watch.jpg" style="width: 23px; height: 21px;" alt="">Watches and Jewelry</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Books and Literature"},null)" style="background-color: whitesmoke; color: black;"><img src="../../Content/img/hero/books.jpg" style="width: 23px; height: 21px;" alt="">Books and Literature</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Health and Beauty"},null)" style="background-color: whitesmoke; color: black;"><img src="../../Content/img/hero/healt.jpg" style="width: 23px; height: 21px;" alt="">Health and Beauty</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Machines and Tools"},null)" style="background-color: whitesmoke; color: black;"><img src="../../Content/img/hero/machines.jpg" style="width: 23px; height: 21px;" alt="">Machines and Tools</a></li>
+                                <li><a href="@Url.Action("ListByCategory","Products",new { Category="Food and Cooking"},null)" style="background-color: whitesmoke; color: black;"><img src="../../Content/img/hero/food.png" style="width: 23px; height: 21px;" alt="">Food and Cooking</a></li>
+                                <li><a href="@Url.Action("Index","Products")" style="background-color: whitesmoke; color: black;"><img src="../../Content/img/hero/hero-bg.jpg" style="width: 23px; height: 21px;" alt=""> All Categories</a></li>
                             </ul>
                         </div>
                     </div>
