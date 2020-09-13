@@ -32,19 +32,19 @@ namespace ShopDrop.Controllers
         [AllowAnonymous]
         public ActionResult ListByCategory(String Category)
         {
-            if(Category == "All")
+            if (Category == "All")
             {
-                return View("Index",db.Products.ToList().FindAll(x=>x.selller_id != @User.Identity.GetUserId()));
+                return View("Index", db.Products.ToList().FindAll(x => x.selller_id != @User.Identity.GetUserId()));
             }
             return View("Index", db.Products.ToList().FindAll(x => x.category == Category && x.selller_id != @User.Identity.GetUserId()));
         }
 
         [AllowAnonymous]
-        public ActionResult ListByCategoryAndSearch(String Category,String text)
+        public ActionResult ListByCategoryAndSearch(String Category, String text)
         {
             if (Category == "All")
             {
-                if(text == "")
+                if (text == "")
                 {
                     return View("Index", db.Products.ToList().FindAll(x => x.selller_id != @User.Identity.GetUserId()));
                 }
@@ -152,11 +152,11 @@ namespace ShopDrop.Controllers
             {
                 return HttpNotFound();
             }
-            if(product.selller_id != User.Identity.GetUserId())
+            if (product.selller_id != User.Identity.GetUserId())
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
-            
+
             return View(product);
         }
 
@@ -170,7 +170,7 @@ namespace ShopDrop.Controllers
         {
             product.selller_id = User.Identity.GetUserId();
             product.sellerName = User.Identity.GetUserName();
-      
+
             if (ImageFile != null)
             {
                 string trailingPath = Path.GetFileName(ImageFile.FileName);
@@ -179,7 +179,7 @@ namespace ShopDrop.Controllers
                 trailingPath = DateTime.Now.ToString("yyyy-MM-dd-hh-mm") + "_" + trailingPath + extension;
                 string fullPath = Path.Combine(Server.MapPath("~/UserImages"), trailingPath);
                 product.Image = trailingPath;
-              
+
                 ImageFile.SaveAs(fullPath);
             }
             if (ModelState.IsValid)
