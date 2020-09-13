@@ -14,11 +14,13 @@ using ShopDrop.Models;
 
 namespace ShopDrop.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Products
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(db.Products.ToList());
@@ -27,6 +29,7 @@ namespace ShopDrop.Controllers
         {
             return View(db.Products.ToList());
         }
+        [AllowAnonymous]
         public ActionResult ListByCategory(String Category)
         {
             if(Category == "All")
@@ -36,7 +39,7 @@ namespace ShopDrop.Controllers
             return View("Index", db.Products.ToList().FindAll(x => x.category == Category && x.selller_id != @User.Identity.GetUserId()));
         }
 
-
+        [AllowAnonymous]
         public ActionResult ListByCategoryAndSearch(String Category,String text)
         {
             if (Category == "All")

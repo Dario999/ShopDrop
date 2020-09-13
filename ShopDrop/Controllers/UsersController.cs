@@ -11,6 +11,7 @@ using ShopDrop.Models;
 
 namespace ShopDrop.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
