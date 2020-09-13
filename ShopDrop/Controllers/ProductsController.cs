@@ -163,7 +163,7 @@ namespace ShopDrop.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "Id,Name,Price,Quantity,Image,category")] Product product, HttpPostedFileBase ImageFile)
+        public ActionResult Edit([Bind(Include = "Id,Name,Price,Quantity,Image,category, description")] Product product, HttpPostedFileBase ImageFile)
         {
             product.selller_id = User.Identity.GetUserId();
             product.sellerName = User.Identity.GetUserName();
