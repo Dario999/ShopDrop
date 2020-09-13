@@ -32,12 +32,12 @@ namespace ShopDrop.Controllers
         {
             string user_id = User.Identity.GetUserId();
             User user = db.Users.FirstOrDefaultAsync(x => x.user_id == user_id).Result;
-            if (balance < 100.0 || Request.Form["balance"] == null || string.IsNullOrWhiteSpace(Request.Form["balance"]))
+            if (balance < 20.0 || Request.Form["balance"] == null || string.IsNullOrWhiteSpace(Request.Form["balance"]))
             {
                 TempData["ErrorMessage"] = "Please insert a value bigger than 20$";
                 return RedirectToAction("Balance", "Users", "");
             }
-            else if(balance >= 100.0)
+            else if(balance >= 20.0)
             {
                 user.balance += balance;
             }

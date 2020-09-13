@@ -12,32 +12,10 @@ using ShopDrop.Models;
 
 namespace ShopDrop.Controllers
 {
+    [Authorize]
     public class PurchasesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: Purchases
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: Purchases/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Purchase purchase = db.Purchases.Find(id);
-            if (purchase == null)
-            {
-                return HttpNotFound();
-            }
-            return View(purchase);
-        }
-
-       
 
         public ActionResult Orders()
         {
@@ -80,7 +58,8 @@ namespace ShopDrop.Controllers
             Product product = db.Products.Find(productId);
             if (quantity > product.Quantity)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                TempData["MaxQuantity"] = "You can't buy more than maximum quantity";
+                return RedirectToAction("NewOrder", "Purchases", new { productId = product.Id });
             }
 
             string user_id = User.Identity.GetUserId();
@@ -89,11 +68,12 @@ namespace ShopDrop.Controllers
 
             if(User.Identity.GetUserId() == product.selller_id)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("NewOrder", "Purchases", new { productId = product.Id });
             }
             if(user.balance < product.Price * quantity)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                TempData["MoneyError"] = "You don't have enough money. Please add to your balance.";
+                return RedirectToAction("NewOrder", "Purchases", new { productId = product.Id });
             }
             Purchase purchase = new Purchase();
             purchase.seller_id = product.selller_id;
@@ -109,32 +89,7 @@ namespace ShopDrop.Controllers
             return View("SuccessfulPurchase", purchase);
         }
        
-        // GET: Purchases/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Purchase purchase = db.Purchases.Find(id);
-            if (purchase == null)
-            {
-                return HttpNotFound();
-            }
-            return View(purchase);
-        }
-
-        // POST: Purchases/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Purchase purchase = db.Purchases.Find(id);
-            db.Purchases.Remove(purchase);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)
