@@ -23,20 +23,20 @@ namespace ShopDrop.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            return View(db.Products.ToList().OrderByDescending(x => x.date_posted));
         }
         public ActionResult ShowMyProducts()
         {
-            return View(db.Products.ToList());
+            return View(db.Products.ToList().OrderByDescending(x => x.date_posted));
         }
         [AllowAnonymous]
         public ActionResult ListByCategory(String Category)
         {
             if (Category == "All")
             {
-                return View("Index", db.Products.ToList().FindAll(x => x.selller_id != @User.Identity.GetUserId()));
+                return View("Index", db.Products.ToList().FindAll(x => x.selller_id != @User.Identity.GetUserId()).OrderByDescending(x => x.date_posted));
             }
-            return View("Index", db.Products.ToList().FindAll(x => x.category == Category && x.selller_id != @User.Identity.GetUserId()));
+            return View("Index", db.Products.ToList().FindAll(x => x.category == Category && x.selller_id != @User.Identity.GetUserId()).OrderByDescending(x => x.date_posted));
         }
 
         [AllowAnonymous]
@@ -46,20 +46,20 @@ namespace ShopDrop.Controllers
             {
                 if (text == "")
                 {
-                    return View("Index", db.Products.ToList().FindAll(x => x.selller_id != @User.Identity.GetUserId()));
+                    return View("Index", db.Products.ToList().FindAll(x => x.selller_id != @User.Identity.GetUserId()).OrderByDescending(x => x.date_posted));
                 }
-                return View("Index", db.Products.Where(x => x.Name.ToLower().Contains(text.ToLower())).ToList().FindAll(x => x.selller_id != @User.Identity.GetUserId()));
+                return View("Index", db.Products.Where(x => x.Name.ToLower().Contains(text.ToLower())).ToList().FindAll(x => x.selller_id != @User.Identity.GetUserId()).OrderByDescending(x => x.date_posted));
             }
-            return View("Index", db.Products.ToList().FindAll(x => x.selller_id != @User.Identity.GetUserId() && x.category == Category && x.Name.ToLower().Contains(text.ToLower())));
+            return View("Index", db.Products.ToList().FindAll(x => x.selller_id != @User.Identity.GetUserId() && x.category == Category && x.Name.ToLower().Contains(text.ToLower())).OrderByDescending(x => x.date_posted));
         }
 
         public ActionResult ListByCategoryMyProducts(String Category)
         {
             if (Category == "All")
             {
-                return View("Index", db.Products.ToList().FindAll(x => x.selller_id == @User.Identity.GetUserId()));
+                return View("Index", db.Products.ToList().FindAll(x => x.selller_id == @User.Identity.GetUserId()).OrderByDescending(x => x.date_posted));
             }
-            return View("Index", db.Products.ToList().FindAll(x => x.category == Category && x.selller_id == @User.Identity.GetUserId()));
+            return View("Index", db.Products.ToList().FindAll(x => x.category == Category && x.selller_id == @User.Identity.GetUserId()).OrderByDescending(x => x.date_posted));
         }
 
 
@@ -69,11 +69,11 @@ namespace ShopDrop.Controllers
             {
                 if (text == "")
                 {
-                    return View("ShowMyProducts", db.Products.ToList().FindAll(x => x.selller_id == @User.Identity.GetUserId()));
+                    return View("ShowMyProducts", db.Products.ToList().FindAll(x => x.selller_id == @User.Identity.GetUserId()).OrderByDescending(x => x.date_posted));
                 }
-                return View("ShowMyProducts", db.Products.Where(x => x.Name.ToLower().Contains(text.ToLower())).ToList().FindAll(x => x.selller_id == @User.Identity.GetUserId()));
+                return View("ShowMyProducts", db.Products.Where(x => x.Name.ToLower().Contains(text.ToLower())).ToList().FindAll(x => x.selller_id == @User.Identity.GetUserId()).OrderByDescending(x => x.date_posted));
             }
-            return View("ShowMyProducts", db.Products.ToList().FindAll(x => x.selller_id == @User.Identity.GetUserId() && x.category == Category && x.Name.ToLower().Contains(text.ToLower())));
+            return View("ShowMyProducts", db.Products.ToList().FindAll(x => x.selller_id == @User.Identity.GetUserId() && x.category == Category && x.Name.ToLower().Contains(text.ToLower())).OrderByDescending(x => x.date_posted));
         }
 
         private String computeHash(String fileName)
