@@ -59,7 +59,7 @@ namespace ShopDrop.Controllers
             return View("Orders", products);
         }
 
-        
+        [Authorize]
         public ActionResult NewOrder(int productId)
         {
             Product product = db.Products.Find(productId);
@@ -71,6 +71,7 @@ namespace ShopDrop.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult NewOrder(int productId, int quantity)
         {

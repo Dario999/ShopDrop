@@ -17,7 +17,9 @@ namespace ShopDrop.Models
 
         public static List<string> getAllCategories()
         {
-            return new List<string>() { "Technology", "Beauty Products", "Food", "Automobile", "Household" };
+            return new List<string>() { "Vehicles", "Real Estate", "Home and Garden", "Clothing and Footwear", "Technology", "Sport Equipment"
+                ,"Watches and Jewelry","Books and Literature","Health and Beauty","Machines and Tools","Food and Cooking" ,"Other"
+            };
         }
     }
 }
