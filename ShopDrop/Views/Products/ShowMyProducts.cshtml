@@ -104,14 +104,14 @@
 
 @section Scripts {
 
-            <script>
-                function myFunction() {
+    <script>
+        function myFunction() {
 
-                    var sel_category = document.getElementById('selected_category');
-                    var search_text = document.getElementById('search_holder');
+            var sel_category = document.getElementById('selected_category');
+            var search_text = document.getElementById('search_holder');
 
-                    console.log(sel_category);
-                    document.getElementById('search_link').href = "/Products/ListByCategoryAndSearchMyProducts?Category=" + sel_category.value + "&text=" + search_text.value;
-                }
-            </script>
+            console.log(sel_category);
+            document.getElementById('search_link').href = "/Products/ListByCategoryAndSearchMyProducts?Category=" + sel_category.value + "&text=" + search_text.value;
+        }
+    </script>
 }
