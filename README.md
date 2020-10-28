@@ -13,8 +13,3 @@ Each user:
 
 
 
-Made by:
-- Dario Ivanovski
-- Kristijan Eftimov
-- Stojance Malinov
-- Marko Krstevski
